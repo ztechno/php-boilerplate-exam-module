@@ -23,7 +23,7 @@
     <span id="minutes">00</span> :
     <span id="seconds">00</span>
 </div>
-<form action="" method="post">
+<form action="" method="post" name="exam_form">
 <?= csrf_field() ?>
 <?php foreach($schedule_user_data->data as $index => $data): ?>
 <div class="card mb-3">
@@ -61,7 +61,8 @@
         }
         else
         {
-            location.reload();
+            // location.reload();
+            exam_form.submit()
         }
 
         countDownDate--
