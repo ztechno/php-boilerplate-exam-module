@@ -31,7 +31,7 @@
                 <?php foreach($data->answers as $answer): ?>
                 <li>
                     <label for="asnwer_<?=$data->id?>_<?=$answer->id?>">
-                        <input type="radio" id="asnwer_<?=$data->id?>_<?=$answer->id?>" <?= $answer->id == $normalizeAnswers[$data->id]->answer_id ? 'checked' : '' ?> disabled>
+                        <input type="radio" id="asnwer_<?=$data->id?>_<?=$answer->id?>" <?= isset($normalizeAnswers[$data->id]) && $answer->id == $normalizeAnswers[$data->id]->answer_id ? 'checked' : '' ?> disabled>
                         <?=$answer->description?>
                     </label>
                 </li>
