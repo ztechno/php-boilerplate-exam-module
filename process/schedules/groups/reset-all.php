@@ -3,8 +3,6 @@
 use Core\Database;
 
 $schedule_group_id = $_GET['schedule_group_id'];
-$user_id = $_GET['user_id'];
-$schedule_id = $_GET['schedule_id'];
 $db = new Database;
 
 $exam_group = $db->single('exam_schedule_groups', ['id' => $schedule_group_id]);
