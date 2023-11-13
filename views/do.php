@@ -36,8 +36,8 @@
             <ul>
                 <?php foreach($data->answers as $answer): ?>
                 <li>
-                    <label for="asnwer_<?=$data->id?>_<?=$answer->question_id?>">
-                        <input type="radio" id="asnwer_<?=$data->id?>_<?=$answer->question_id?>" name="answer[<?=$data->question_id?>]" value="<?=$answer->id?>">
+                    <label for="asnwer_<?=$data->question_id?>_<?=$answer->id?>">
+                        <input type="radio" id="asnwer_<?=$data->question_id?>_<?=$answer->id?>" name="answer[<?=$data->question_id?>]" value="<?=$answer->id?>">
                         <?=$answer->description?>
                     </label>
                 </li>
