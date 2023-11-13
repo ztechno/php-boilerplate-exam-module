@@ -63,11 +63,10 @@ CREATE TABLE exam_member_answers (
     user_id INT NOT NULL,
     schedule_id INT NOT NULL,
     question_item_id INT NOT NULL,
-    answer_id INT NOT NULL,
+    answer_id INT DEFAULT NULL,
     score VARCHAR(10) DEFAULT "0",
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_exam_member_answers_user_id FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     CONSTRAINT fk_exam_member_answers_schedule_id FOREIGN KEY (schedule_id) REFERENCES exam_schedules(id) ON DELETE CASCADE,
-    CONSTRAINT fk_exam_member_answers_question_item_id FOREIGN KEY (question_item_id) REFERENCES exam_question_items(id) ON DELETE CASCADE,
-    CONSTRAINT fk_exam_member_answers_answer_id FOREIGN KEY (answer_id) REFERENCES exam_question_answers(id) ON DELETE CASCADE
+    CONSTRAINT fk_exam_member_answers_question_item_id FOREIGN KEY (question_item_id) REFERENCES exam_question_items(id) ON DELETE CASCADE
 );

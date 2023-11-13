@@ -17,13 +17,21 @@ if($schedule)
 {
     if(Request::isMethod('POST'))
     {
+        $schedule_user_data = $db->single('exam_schedule_user_data', [
+            'schedule_id' => $schedule_id,
+            'user_id'     => auth()->id
+        ]);
+
+        $data = json_decode($schedule_user_data->data);
+
         // save jawaban
         $answers = $_POST['answer'];
         $query = "";
         $userId = auth()->id;
-        foreach($answers as $item_id => $answer_id)
+        foreach($data as $d)
         {
-            $query .= "INSERT INTO exam_member_answers(user_id,schedule_id,question_item_id,answer_id,score)VALUES($userId,$schedule_id,$item_id,$answer_id,(SELECT score FROM exam_question_answers WHERE id = $answer_id));";
+            $answer_id = $answers && isset($answers[$d->question_id]) ? $answers[$d->question_id] : 0;
+            $query .= "INSERT INTO exam_member_answers(user_id,schedule_id,question_item_id,answer_id,score)VALUES($userId,$schedule_id,$d->question_id,$answer_id,(SELECT score FROM exam_question_answers WHERE id = $answer_id));";
         }
 
         $db->query = $query;
