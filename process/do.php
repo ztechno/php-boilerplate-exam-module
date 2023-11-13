@@ -34,8 +34,8 @@ if($schedule)
         $userId = auth()->id;
         foreach($data as $d)
         {
-            $answer_id = $answers && isset($answers[$d->question_id]) ? $answers[$d->question_id] : 0;
-            $query .= "INSERT INTO exam_member_answers(user_id,schedule_id,question_item_id,answer_id,score)VALUES($userId,$schedule_id,$d->question_id,$answer_id,(SELECT score FROM exam_question_answers WHERE id = $answer_id));";
+            $answer_id = $answers && isset($answers[$d->id]) ? $answers[$d->id] : 0;
+            $query .= "INSERT INTO exam_member_answers(user_id,schedule_id,question_item_id,answer_id,score)VALUES($userId,$schedule_id,$d->id,$answer_id,(SELECT score FROM exam_question_answers WHERE id = $answer_id));";
         }
 
         $db->query = $query;
