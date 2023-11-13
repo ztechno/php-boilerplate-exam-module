@@ -18,7 +18,7 @@
     padding-bottom:5px;
 }
 </style>
-<div class="badge bg-danger" style="position:absolute;top:20px;z-index:999999">
+<div class="badge bg-danger" style="position:absolute;top:46px;z-index:999999;left:calc(50% - calc(68.6px / 2))">
     <span id="hours">00</span> :
     <span id="minutes">00</span> :
     <span id="seconds">00</span>
