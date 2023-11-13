@@ -1,4 +1,5 @@
 <?php get_header() ?>
+<a href="<?=routeTo('exam/schedules/groups/reset-all', ['schedule_group_id' => $_GET['schedule_group_id']])?>" class="btn btn-warning" onclick="if(confirm('Apakah anda yakin akan me-reset semua jawaban peserta ?')){return true}else{return false}">Reset All</a>
 <div class="table-responsive table-hover table-sales">
     <table class="table table-bordered datatable" style="width:100%">
         <thead>

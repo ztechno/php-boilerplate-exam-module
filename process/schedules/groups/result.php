@@ -40,9 +40,11 @@ $db->query = "SELECT
                 FROM 
                     users 
                 JOIN
-                    exam_schedules ON exam_schedules.id = (SELECT schedule_id FROM exam_schedule_groups WHERE exam_schedule_groups.id = $schedule_group_id)
+                    exam_schedule_groups ON exam_schedule_groups.id = $schedule_group_id
+                JOIN
+                    exam_schedules ON exam_schedules.id = exam_schedule_groups.schedule_id
                 WHERE 
-                    users.id IN (SELECT user_id FROM exam_group_member WHERE group_id = (SELECT group_id FROM exam_schedule_groups WHERE exam_schedule_groups.id = $schedule_group_id))";
+                    users.id IN (SELECT user_id FROM exam_group_member WHERE group_id = exam_schedule_groups.group_id)";
 $member = $db->exec('all');
 
 return view('exam/views/schedules/groups/result', compact('member'));
