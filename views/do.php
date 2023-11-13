@@ -18,6 +18,11 @@
     padding-bottom:5px;
 }
 </style>
+<div class="badge bg-danger" style="position:absolute;top:20px;z-index:999999">
+    <span id="hours">00</span> :
+    <span id="minutes">00</span> :
+    <span id="seconds">00</span>
+</div>
 <form action="" method="post">
 <?= csrf_field() ?>
 <?php foreach($schedule_user_data->data as $index => $data): ?>
@@ -44,5 +49,23 @@
 <?php endforeach ?>
 <button class="btn btn-block btn-primary w-100">Selesai</button>
 </form>
+<script>
+(function(){
+    var countDownDate = <?=strtotime($schedule->end_at)-strtotime('now')?>;
+    setInterval(function() {
 
+        if (countDownDate > 0) {
+            document.getElementById("hours").innerText = Math.floor((countDownDate % (60 * 60 * 24)) / (60 * 60));
+            document.getElementById("minutes").innerText = Math.floor((countDownDate % (60 * 60)) / (60));
+            document.getElementById("seconds").innerText = Math.floor((countDownDate % (60)));
+        }
+        else
+        {
+            location.reload();
+        }
+
+        countDownDate--
+    }, 1000);
+})();
+</script>
 <?php get_footer() ?>

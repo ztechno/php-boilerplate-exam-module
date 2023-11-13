@@ -55,7 +55,7 @@ if($schedule)
         
             $schedule_user_data->data = json_decode($schedule_user_data->data);
         
-            return view('exam/views/do', compact('schedule_user_data'));
+            return view('exam/views/do', compact('schedule_user_data','schedule'));
         }
     }
     else
