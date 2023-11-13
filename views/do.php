@@ -24,7 +24,7 @@
     <span id="seconds">00</span>
 </div>
 <form action="" method="post" name="exam_form">
-<?= csrf_field() ?>
+<?= csrf_field() ?> 
 <?php foreach($schedule_user_data->data as $index => $data): ?>
 <div class="card mb-3">
     <div class="card-header d-flex flex-grow-1 align-items-center">
