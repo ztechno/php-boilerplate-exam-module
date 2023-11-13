@@ -25,7 +25,7 @@ if($schedule)
         $data = json_decode($schedule_user_data->data);
 
         // save jawaban
-        $answers = $_POST['answer'];
+        $answers = isset($_POST['answer']) ? $_POST['answer'] : false;
         $query = "";
         $userId = auth()->id;
         foreach($data as $d)
