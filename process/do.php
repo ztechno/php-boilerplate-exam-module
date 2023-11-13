@@ -17,6 +17,10 @@ if($schedule)
 {
     if(Request::isMethod('POST'))
     {
+        $db->delete('exam_member_answers', [
+            'schedule_id' => $schedule_id,
+            'user_id'     => auth()->id
+        ]);
         $schedule_user_data = $db->single('exam_schedule_user_data', [
             'schedule_id' => $schedule_id,
             'user_id'     => auth()->id
