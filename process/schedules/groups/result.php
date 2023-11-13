@@ -36,7 +36,7 @@ $db->query = "SELECT
                     users.id, 
                     users.name,
                     exam_schedules.id schedule_id,
-                    (SELECT SUM(score) FROM exam_member_answers WHERE exam_member_answers.user_id = users.id AND schedule_id = exam_schedules.id)/exam_schedules.question_showed as final_score
+                    (SELECT SUM(score) FROM exam_member_answers WHERE exam_member_answers.user_id = users.id AND schedule_id = exam_schedules.id)/exam_schedules.question_showed*100 as final_score
                 FROM 
                     users 
                 JOIN
