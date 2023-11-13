@@ -55,9 +55,12 @@
     setInterval(function() {
 
         if (countDownDate > 0) {
-            document.getElementById("hours").innerText = Math.floor((countDownDate % (60 * 60 * 24)) / (60 * 60));
-            document.getElementById("minutes").innerText = Math.floor((countDownDate % (60 * 60)) / (60));
-            document.getElementById("seconds").innerText = Math.floor((countDownDate % (60)));
+            const h = Math.floor((countDownDate % (60 * 60 * 24)) / (60 * 60))
+            const m = Math.floor((countDownDate % (60 * 60)) / (60))
+            const s = Math.floor((countDownDate % (60)))
+            document.getElementById("hours").innerText = h < 10 ? `0${h}` : h;
+            document.getElementById("minutes").innerText = m < 10 ? `0${m}` : m;
+            document.getElementById("seconds").innerText = s < 10 ? `0${s}` : s;
         }
         else
         {
