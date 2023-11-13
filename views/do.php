@@ -52,20 +52,19 @@
 <script>
 (function(){
     var countDownDate = <?=strtotime($schedule->end_at)-strtotime('now')?>;
-    setInterval(function() {
+    window.countdownInterval = setInterval(function() {
 
-        if (countDownDate > 0) {
-            const h = Math.floor((countDownDate % (60 * 60 * 24)) / (60 * 60))
-            const m = Math.floor((countDownDate % (60 * 60)) / (60))
-            const s = Math.floor((countDownDate % (60)))
-            document.getElementById("hours").innerText = h < 10 ? `0${h}` : h;
-            document.getElementById("minutes").innerText = m < 10 ? `0${m}` : m;
-            document.getElementById("seconds").innerText = s < 10 ? `0${s}` : s;
-        }
-        else
+        const h = Math.floor((countDownDate % (60 * 60 * 24)) / (60 * 60))
+        const m = Math.floor((countDownDate % (60 * 60)) / (60))
+        const s = Math.floor((countDownDate % (60)))
+        document.getElementById("hours").innerText = h < 10 ? `0${h}` : h;
+        document.getElementById("minutes").innerText = m < 10 ? `0${m}` : m;
+        document.getElementById("seconds").innerText = s < 10 ? `0${s}` : s;
+        if (countDownDate == 0)
         {
             // location.reload();
             exam_form.submit()
+            clearInterval(window.countdownInterval)
         }
 
         countDownDate--
