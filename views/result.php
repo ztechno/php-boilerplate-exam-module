@@ -38,7 +38,7 @@
                 <?php endforeach ?>
             </ul>
 
-            <?= $normalizeAnswers[$data->id]->score ? '<span class="badge bg-success">Benar</span>' : '<span class="badge bg-danger">Salah</span>' ?>
+            <?= isset($normalizeAnswers[$data->id]) && $normalizeAnswers[$data->id]->score ? '<span class="badge bg-success">Benar</span>' : '<span class="badge bg-danger">Salah</span>' ?>
         </div>
     </div>
 </div>
