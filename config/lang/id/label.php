@@ -27,7 +27,7 @@ return [
     'answers' => 'Jawaban',
     'import' => 'Import',
     'question_import' => 'Import Soal',
-    'member_import' => 'Import Gambar Pendukung',
+    'member_import' => 'Import Peserta',
     'question_file' => 'File Soal',
     'image_file' => 'File Gambar Pendukung',
     'member_file' => 'File Peserta',
