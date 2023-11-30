@@ -66,7 +66,12 @@ if(Request::isMethod('POST'))
         {
             $normalizeColumn = $ansCol - 4;
             $answer = $worksheet->getCellByColumnAndRow($ansCol, $row)->getValue();
-            $answer = str_replace('{'.$file.'}','<img src="'.$fileLocation.'" width="100%">', $answer);
+            foreach($allFiles as $file)
+            {
+                $fileLocation = asset('storage/'.$question_id.'/'.$file);
+                $description = str_replace('{'.$file.'}','<img src="'.$fileLocation.'" width="100%">', $description);
+                $answer = str_replace('{'.$file.'}','<img src="'.$fileLocation.'" width="100%">', $answer);
+            }
             $db->insert('exam_question_answers',[
                 'item_id' => $question_item->id,
                 'description' => $answer,
