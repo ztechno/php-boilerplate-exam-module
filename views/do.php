@@ -17,6 +17,31 @@
     padding-top:5px;
     padding-bottom:5px;
 }
+
+/* input[type="radio"]:checked+label { font-weight: bold; color: green !important; } */
+input[type="radio"] ~ span {
+    border-radius: 50%;
+    padding: 5px;
+    height: 25px;
+    width: 25px;
+    line-height: 14px;
+    background: #FFF;
+    text-align: center;
+    font-weight:bold;
+}
+input[type="radio"]:checked ~ span { 
+    font-weight: bold;
+    color: #FFF;
+    background: green;
+}
+/* input[type="radio"]:checked ~ label { 
+    font-weight: bold;
+    color: #FFF;
+    background: green;
+} */
+input[type="radio"] {
+    margin-right: -10px;
+}
 </style>
 <div class="badge bg-danger" style="position:absolute;top:46px;z-index:999999;left:calc(50% - calc(68.6px / 2))">
     <span id="hours">00</span> :
@@ -34,12 +59,17 @@
         <p><?=$data->description?></p>
         <div class="answers">
             <ul>
-                <?php foreach($data->answers as $answer): ?>
+                <?php foreach($data->answers as $key => $answer): ?>
                 <li>
-                    <label for="answer_<?=$data->id?>_<?=$answer->id?>">
-                        <input type="radio" id="answer_<?=$data->id?>_<?=$answer->id?>" name="answer[<?=$data->id?>]" value="<?=$answer->id?>">
-                        <?=$answer->description?>
-                    </label>
+                    <div style="display:flex;flex-direction: row-reverse;align-items:center">
+                        <input type="radio" style="opacity: 0;" id="answer_<?=$data->id?>_<?=$answer->id?>" name="answer[<?=$data->id?>]" value="<?=$answer->id?>">
+                        <label for="answer_<?=$data->id?>_<?=$answer->id?>">
+                            <?=$answer->description?>
+                        </label>
+                        <span class="me-3 cursor-pointer"  onclick="document.querySelector('#answer_<?=$data->id?>_<?=$answer->id?>').click()">
+                            <?=chr($key+65)?>
+                        </span>
+                    </div>
                 </li>
                 <?php endforeach ?>
             </ul>
