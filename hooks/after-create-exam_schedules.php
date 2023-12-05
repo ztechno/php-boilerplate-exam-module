@@ -18,7 +18,7 @@ $schedule = $data;
 $schedule_id = $data->id;
 $schedule->question = $db->single('exam_questions', "id = (SELECT question_id FROM exam_schedule_questions WHERE schedule_id = $schedule_id)");
 
-$db->query = "SELECT * FROM users WHERE id IN (SELECT user_id FROM exam_group_member WHERE group_id = (SELECT group_id FROM exam_schedule_groups WHERE schedule_id = $schedule_id))";
+$db->query = "SELECT * FROM users WHERE id IN (SELECT user_id FROM exam_group_member WHERE group_id IN (SELECT group_id FROM exam_schedule_groups WHERE schedule_id = $schedule_id))";
 $users = $db->exec('all');
 foreach($users as $user)
 {    
