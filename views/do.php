@@ -41,6 +41,7 @@ input[type="radio"]:checked ~ span {
 } */
 input[type="radio"] {
     margin-right: -10px;
+    opacity: 0;
 }
 </style>
 <div class="badge bg-danger" style="position:absolute;top:46px;z-index:999999;left:calc(50% - calc(68.6px / 2))">
@@ -100,5 +101,22 @@ input[type="radio"] {
         countDownDate--
     }, 1000);
 })();
+
+
+window.onfocus = function () { 
+    window.location.reload()
+};
+
+// document.onclick = function(){
+//     doFullScreen()
+// }
+
+// function doFullScreen()
+// {
+//     if(!document.fullscreen)
+//     {
+//         document.documentElement.requestFullscreen()
+//     }
+// }
 </script>
 <?php get_footer() ?>

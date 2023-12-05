@@ -41,6 +41,7 @@ input[type="radio"]:checked ~ span {
 } */
 input[type="radio"] {
     margin-right: -10px;
+    opacity: 0;
 }
 </style>
 <h4>Nilai : <?=($totalScore/count($schedule_user_data->data))*100?></h4>
