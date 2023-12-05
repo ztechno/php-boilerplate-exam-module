@@ -60,3 +60,6 @@
     </div>
     <?php endforeach ?>
 </div>
+<script>
+window.print()
+</script>
