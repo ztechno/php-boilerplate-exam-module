@@ -11,7 +11,17 @@ if(in_array($route,['crud/edit','crud/delete']) && $_GET['table'] == 'exam_quest
         'id' => $_GET['id']
     ]);
 
-    if($question->created_by != $auth->id)
+    $isSuperAdmin = false;
+    $allowedRoutes = get_allowed_routes($auth->id);
+    foreach($allowedRoutes as $path)
+    {
+        if($path->route_path == '*')
+        {
+            $isSuperAdmin = true;
+            break;
+        }
+    }
+    if($question->created_by != $auth->id && !$isSuperAdmin)
     {
         set_flash_msg(['error'=>__("exam.label.unauthorized")]);
         header("location: ".$_SERVER['HTTP_REFERER']);
