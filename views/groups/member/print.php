@@ -39,6 +39,10 @@
                             <td><?= $_member->name?></td>
                         </tr>
                         <tr>
+                            <td width="100px"><b>Kelas</b></td>
+                            <td><?= $_member->group_name?></td>
+                        </tr>
+                        <tr>
                             <td><b>Username</b></td>
                             <td><?= $_member->username?></td>
                         </tr>
