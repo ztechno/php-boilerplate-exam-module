@@ -64,8 +64,10 @@ $filter = [
 
 
 $groups = [];
+$group_id = null;
 if(isset($_GET['group_id']))
 {
+    $group_id = $_GET['group_id'];
     $filter['filter']['group_id'] = $_GET['group_id'];
 }
 else

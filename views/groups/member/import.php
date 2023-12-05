@@ -6,7 +6,7 @@
             <a href="<?=asset('assets/exam/format-import-peserta.xlsx')?>" class="btn btn-primary btn-sm">
                 <i class="fa fa-download"></i> <?= __('exam.label.member_format_download') ?>
             </a>
-            <a href="<?=routeTo('crud/index',['table' => 'exam_group_member', 'filter' => ['group_id' => $group_id]])?>" class="btn btn-warning btn-sm">
+            <a href="<?=routeTo('crud/index',['table' => 'exam_group_member', 'filter' => ($group_id ? ['group_id' => $group_id] : [])])?>" class="btn btn-warning btn-sm">
                 <?= __('crud.label.back') ?>
             </a>
         </div>
