@@ -1,6 +1,7 @@
 <?php
 
 use Core\Database;
+use Core\Response;
 
 $auth = auth();
 
@@ -27,6 +28,18 @@ if(in_array($route,['crud/edit','crud/delete']) && $_GET['table'] == 'exam_quest
         header("location: ".$_SERVER['HTTP_REFERER']);
         die();
     }
+}
+
+if($route == 'exam/test')
+{
+    $db = new Database;
+    $data = $db->single('exam_schedule_user_data');
+
+    $data->data = json_decode($data->data);
+
+    echo Response::json($data, '');
+    die();
+    return true;
 }
 
 return true;
