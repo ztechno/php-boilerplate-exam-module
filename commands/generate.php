@@ -59,4 +59,4 @@ foreach($users as $user)
     ]);
 }
 
-echo "Schedule generate success\n";
+echo "$schedule->name generate success\n";
