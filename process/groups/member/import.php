@@ -5,13 +5,13 @@ use Core\Request;
 use Core\Utility;
 use Core\Database;
 use Modules\Crud\Libraries\Repositories\CrudRepository;
-$group_id = $_GET['group_id'];
 
+$db = new Database;
 
 if(Request::isMethod('POST'))
 {
-    $db = new Database;
     $inputFileName = $_FILES['member_file']['tmp_name'];
+    $group_id = isset($_GET['group_id']) ? $_GET['group_id'] : (isset($_POST['group_id']) ? $_POST['group_id'] : null);
 
     /**  Identify the type of $inputFileName  **/
     $inputFileType = \PhpOffice\PhpSpreadsheet\IOFactory::identify($inputFileName);
@@ -58,6 +58,20 @@ if(Request::isMethod('POST'))
     die();
 }
 
+$filter = [
+    'filter' => []
+];
+
+
+$groups = [];
+if(isset($_GET['group_id']))
+{
+    $filter['filter']['group_id'] = $_GET['group_id'];
+}
+else
+{
+    $groups = $db->all('exam_groups');
+}
 
 // page section
 $title = _ucwords(__("exam.label.import"));
@@ -70,7 +84,7 @@ Page::setBreadcrumbs([
         'title' => __('crud.label.home')
     ],
     [
-        'url' => routeTo('crud/index', ['table' => 'exam_group_member', 'filter' => ['group_id' => $group_id]]),
+        'url' => routeTo('crud/index', ['table' => 'exam_group_member', $filter]),
         'title' => __('exam.label.exam_group_member')
     ],
     [
@@ -78,4 +92,4 @@ Page::setBreadcrumbs([
     ]
 ]);
 
-return view('exam/views/groups/member/import', compact('group_id'));
+return view('exam/views/groups/member/import', compact('group_id','groups'));

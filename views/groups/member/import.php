@@ -14,6 +14,17 @@
     <div class="card-body">
         <form action="" method="post" enctype="multipart/form-data">
             <?= csrf_field() ?>
+            <?php if(!empty($groups)): ?>
+            <div class="form-group mb-2">
+                <label for=""><?= __('exam.label.group')?></label>
+                <select name="group_id" id="" class="form-control select2" required>
+                    <option value="">Pilih</option>
+                    <?php foreach($groups as $group): ?>
+                    <option value="<?=$group->id?>"><?=$group->name?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+            <?php endif ?>
             <div class="form-group mb-2">
                 <label for=""><?= __('exam.label.member_file')?></label>
                 <input type="file" name="member_file" id="" class="form-control" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
