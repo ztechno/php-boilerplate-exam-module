@@ -5,8 +5,7 @@ use Core\Request;
 use Core\Utility;
 use Core\Database;
 use Modules\Crud\Libraries\Repositories\CrudRepository;
-$question_id = $_GET['question_id'];
-
+$question_id = isset($_GET['question_id']) ? $_GET['question_id'] : null;
 
 if(Request::isMethod('POST'))
 {
@@ -91,7 +90,14 @@ if(Request::isMethod('POST'))
     die();
 }
 
+$params = [
+    'filter' => []
+];
 
+if($question_id)
+{
+    $params['filter']['question_id'] = $question_id;
+}
 // page section
 $title = _ucwords(__("exam.label.import"));
 Page::setActive("exam.exam_question_items");
@@ -103,7 +109,7 @@ Page::setBreadcrumbs([
         'title' => __('crud.label.home')
     ],
     [
-        'url' => routeTo('crud/index', ['table' => 'exam_question_items', 'filter' => ['question_id' => $question_id]]),
+        'url' => routeTo('crud/index', ['table' => 'exam_question_items', $params]),
         'title' => __('exam.label.exam_question_items')
     ],
     [
