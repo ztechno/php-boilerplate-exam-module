@@ -41,4 +41,5 @@ return [
     'generate' => 'Generate',
     'summary' => 'Ringkasan',
     'result' => 'Hasil',
+    'print' => 'Cetak',
 ];
