@@ -18,7 +18,7 @@ if(is_allowed(parsePath(routeTo('exam/do')), auth()->id) && $role->role_id == en
     $button     .= $notStarted ? 'Belum Mulai' : ($finished ? '<a href="'.routeTo('exam/result',['id'=>$data->id]).'" class="btn btn-sm btn-primary">'.__('exam.label.result').'</a> ' : '<a href="'.$doUrl.'" class="btn btn-sm btn-primary" onclick="return validateToken(this)" data-token='.$data->token.'>'.__('exam.label.do').'</a> ');
 }
 
-if(is_allowed(parsePath($groupUrl), auth()->id))
+if(is_allowed(parsePath(routeTo('crud/index',['table'=>'exam_schedule_groups'])), auth()->id))
 {
     $button .= '<a href="'.$groupUrl.'" class="btn btn-sm btn-info"> '.__('exam.label.group').'</a> ';
 }
