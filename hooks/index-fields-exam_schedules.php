@@ -13,6 +13,10 @@ else
 {
     $fields['randomize_question']['type'] = 'text';
     $fields['randomize_answer']['type'] = 'text';
+    $fields['token'] = [
+        'label' => 'Token',
+        'type'  => 'text'
+    ];
 }
 
 return $fields;

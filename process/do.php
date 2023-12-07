@@ -41,6 +41,13 @@ if($schedule)
         $db->query = $query;
         $db->exec("multi_query");
 
+        $db->update('exam_schedule_user_data', [
+            'status' => 'DONE'
+        ], [
+            'schedule_id' => $schedule_id,
+            'user_id'     => auth()->id
+        ]);
+
         set_flash_msg(['success'=>"Ujian telah selesai"]);
 
         header('location:'.routeTo('crud/index',[
@@ -66,6 +73,16 @@ if($schedule)
             Page::setTitle($title);
         
             $schedule_user_data->data = json_decode($schedule_user_data->data);
+
+            if(!$schedule_user_data->status)
+            {
+                $db->update('exam_schedule_user_data', [
+                    'status' => 'ON PROGRESS'
+                ], [
+                    'schedule_id' => $schedule_id,
+                    'user_id'     => auth()->id
+                ]);
+            }
         
             return view('exam/views/do', compact('schedule_user_data','schedule'));
         }

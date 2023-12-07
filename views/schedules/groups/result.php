@@ -7,6 +7,7 @@
                 <th width="20px">#</th>
                 <th>Nama</th>
                 <th>Nilai</th>
+                <th>Status</th>
                 <th></th>
             </tr>
         </thead>
@@ -16,6 +17,7 @@
                 <td><?=$index+1?></td>
                 <td><?=$user->name?></td>
                 <td><?=$user->final_score??'<i>Belum ada nilai</i>'?></td>
+                <td><?=$user->status??'-'?></td>
                 <td>
                     <?php if($user->final_score): ?>
                     <a href="<?=routeTo('exam/schedules/groups/reset',['user_id' => $user->id, 'schedule_id' => $user->schedule_id])?>" class="btn btn-warning">Reset</a>

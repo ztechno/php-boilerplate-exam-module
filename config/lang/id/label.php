@@ -42,4 +42,5 @@ return [
     'summary' => 'Ringkasan',
     'result' => 'Hasil',
     'print' => 'Cetak',
+    'generate token' => 'Generate Token'
 ];
