@@ -48,7 +48,7 @@
                         </tr>
                         <tr>
                             <td><b>Password</b></td>
-                            <td>123456</td>
+                            <td><?= $passwords[$_member->user_id] ?></td>
                         </tr>
                     </table>
                     </td>

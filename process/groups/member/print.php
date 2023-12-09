@@ -12,6 +12,7 @@ if(isset($_GET['group_id']))
 $db = new Database;
 
 $db->query  = "SELECT 
+                 users.id user_id,
                  users.name, 
                  username,
                  exam_groups.id group_id,
@@ -25,5 +26,19 @@ $db->query  = "SELECT
                 $params
                 ";
 $member     = $db->exec('all');
+$passwords  = [];
+foreach($member as $m)
+{
+    $pass = mt_rand(1111111111, 9999999999);
+    $pass = md5($pass);
 
-return view('exam/views/groups/member/print', compact('member'));
+    $passwords[$m->user_id] = $pass;
+
+    $db->update('users', [
+        'password' => $pass
+    ], [
+        'id' => $m->user_id
+    ]);
+}
+
+return view('exam/views/groups/member/print', compact('member', 'passwords'));
