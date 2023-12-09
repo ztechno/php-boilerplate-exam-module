@@ -4,9 +4,9 @@ use Core\Database;
 
 $params   = "";
 
-if(isset($_GET['schedule_group_id']))
+if(isset($_GET['group_id']))
 {
-    $params = " WHERE exam_group_member.group_id = (SELECT group_id FROM exam_schedule_groups WHERE id = $_GET[schedule_group_id])";
+    $params = " WHERE exam_group_member.group_id = $_GET[group_id]";
 }
 
 $db = new Database;
