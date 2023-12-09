@@ -44,4 +44,5 @@ return [
     'print' => 'Cetak',
     'generate token' => 'Generate Token',
     'presence list' => 'Daftar Hadir',
+    'preview' => 'Preview',
 ];
