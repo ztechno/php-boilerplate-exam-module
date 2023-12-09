@@ -42,5 +42,6 @@ return [
     'summary' => 'Ringkasan',
     'result' => 'Hasil',
     'print' => 'Cetak',
-    'generate token' => 'Generate Token'
+    'generate token' => 'Generate Token',
+    'presence list' => 'Daftar Hadir',
 ];
