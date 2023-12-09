@@ -27,4 +27,4 @@ $db->query  = "SELECT
                 ";
 $member     = $db->exec('all');
 
-return view('exam/views/schedules/groups/presence-list', compact('member'));
+return view('exam/views/groups/member/presence-list', compact('member'));
