@@ -30,9 +30,9 @@ $passwords  = [];
 foreach($member as $m)
 {
     $pass = mt_rand(1111111111, 9999999999);
-    $pass = md5($pass);
-
     $passwords[$m->user_id] = $pass;
+    
+    $pass = md5($pass);
 
     $db->update('users', [
         'password' => $pass
