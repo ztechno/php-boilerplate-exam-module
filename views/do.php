@@ -63,7 +63,7 @@ input[type="radio"] {
                 <?php foreach($data->answers as $key => $answer): ?>
                 <li>
                     <div style="display:flex;flex-direction: row-reverse;align-items:center">
-                        <input type="radio" style="opacity: 0;" id="answer_<?=$data->id?>_<?=$answer->id?>" name="answer[<?=$data->id?>]" value="<?=$answer->id?>">
+                        <input type="radio" style="opacity: 0;" id="answer_<?=$data->id?>_<?=$answer->id?>" data-questionid="<?=$data->id?>" name="answer[<?=$data->id?>]" value="<?=$answer->id?>" onchange="setToStorage(this)">
                         <label for="answer_<?=$data->id?>_<?=$answer->id?>">
                             <?=$answer->description?>
                         </label>
@@ -81,6 +81,7 @@ input[type="radio"] {
 <button class="btn btn-block btn-primary w-100">Selesai</button>
 </form>
 <script>
+window.storage_prefix = 'answers_<?=auth()->id?>_<?=$schedule_user_data->schedule_id?>';
 (function(){
     var countDownDate = <?=strtotime($schedule->end_at)-strtotime('now')?>;
     window.countdownInterval = setInterval(function() {
@@ -102,6 +103,39 @@ input[type="radio"] {
     }, 1000);
 })();
 
+
+function setToStorage(el)
+{
+    const answers = JSON.parse(window.localStorage.getItem(window.storage_prefix)) ?? []
+
+    const idx = answers.findIndex(answer => answer.id == el.dataset.questionid)
+
+    if(idx > -1)
+    {
+        answers.splice(idx, 1);
+    }
+
+    answers.push({id: el.dataset.questionid, value: el.value})
+    
+    window.localStorage.setItem(window.storage_prefix, JSON.stringify(answers))
+}
+
+function initStorage()
+{
+    const answers = JSON.parse(window.localStorage.getItem(window.storage_prefix)) ?? []
+
+    if(answers.length)
+    {
+        for(let i=0;i<answers.length;i++)
+        {
+            answer = answers[i]
+            const selector = "[name='answer["+answer.id+"]'][value='"+answer.value+"']"
+            document.querySelector(selector).checked = true
+        }
+    }
+}
+
+initStorage()
 
 // window.onfocus = function () { 
 //     window.location.reload()
