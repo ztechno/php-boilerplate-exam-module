@@ -64,10 +64,11 @@
             </table>
 
             <div style="width:300px;margin-left:auto;text-align:center;margin-top:50px;">
-            <b>DIKETAHUI</b>
-            <br><br>
-            <br><br>
+            <b>DIKETAHUI</b><br>
             <b>PENGAWAS</b>
+            <br><br>
+            <br><br>
+            __________________________
             </div>
         </div>
     </div>
