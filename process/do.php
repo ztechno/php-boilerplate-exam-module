@@ -17,10 +17,6 @@ if($schedule)
 {
     if(Request::isMethod('POST'))
     {
-        $db->delete('exam_member_answers', [
-            'schedule_id' => $schedule_id,
-            'user_id'     => auth()->id
-        ]);
         $schedule_user_data = $db->single('exam_schedule_user_data', [
             'schedule_id' => $schedule_id,
             'user_id'     => auth()->id
@@ -30,23 +26,21 @@ if($schedule)
 
         // save jawaban
         $answers = isset($_POST['answer']) ? $_POST['answer'] : false;
-        $query = "";
-        $userId = auth()->id;
+        $query   = "DELETE FROM exam_member_answers WHERE schedule_id = $schedule_id AND user_id = ".auth()->id.";";
+        $userId  = auth()->id;
+
+        // looping
         foreach($data as $d)
         {
             $answer_id = $answers && isset($answers[$d->id]) ? $answers[$d->id] : 0;
             $query .= "INSERT INTO exam_member_answers(user_id,schedule_id,question_item_id,answer_id,score)VALUES($userId,$schedule_id,$d->id,$answer_id,(SELECT score FROM exam_question_answers WHERE id = $answer_id));";
         }
 
+        
+        $query .= "UPDATE exam_schedule_user_data SET `status` = 'DONE' WHERE schedule_id=$schedule_id AND user_id=".auth()->id.";";
+
         $db->query = $query;
         $db->exec("multi_query");
-
-        $db->update('exam_schedule_user_data', [
-            'status' => 'DONE'
-        ], [
-            'schedule_id' => $schedule_id,
-            'user_id'     => auth()->id
-        ]);
 
         set_flash_msg(['success'=>"Ujian telah selesai"]);
 

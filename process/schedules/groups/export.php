@@ -1,6 +1,5 @@
 <?php
 
-use Core\Page;
 use Core\Database;
 
 $schedule_group_id = $_GET['schedule_group_id'];
@@ -8,28 +7,6 @@ $db = new Database;
 
 $db->query = "SELECT * FROM exam_schedules WHERE id = (SELECT schedule_id FROM exam_schedule_groups WHERE id = $schedule_group_id)";
 $schedule = $db->exec('single');
-
-// page section
-$title = "Hasil ".$schedule->name;
-Page::setTitle($title);
-Page::setBreadcrumbs([
-    [
-        'url' => routeTo('/'),
-        'title' => __('crud.label.home')
-    ],
-    [
-        'url' => routeTo('crud/index', ['table' => 'exam_schedules']),
-        'title' => __('exam.label.schedule')
-    ],
-    [
-        'url' => routeTo('crud/index', ['table' => 'exam_schedule_groups', 'filter' => ['schedule_id'=> $schedule->id]]),
-        'title' => $schedule->name
-    ],
-    [
-        'title' => 'Hasil'
-    ]
-]);
-
 
 $db->query = "SELECT 
                     users.id, 
@@ -49,4 +26,4 @@ $db->query = "SELECT
                     users.id IN (SELECT user_id FROM exam_group_member WHERE group_id = exam_schedule_groups.group_id)";
 $member = $db->exec('all');
 
-return view('exam/views/schedules/groups/result', compact('member'));
+return view('exam/views/schedules/groups/export', compact('member', 'schedule'));
