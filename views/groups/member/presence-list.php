@@ -48,8 +48,8 @@
                     <th width="20px">NO</th>
                     <th width="100px">NIS</th>
                     <th width="350px">NAMA</th>
-                    <th colspan="2">TANDA TANGAN</th>
-                    <th>KETERANGAN</th>
+                    <th colspan="2" width="350px">TANDA TANGAN</th>
+                    <th width="100px">KET</th>
                 </tr>
                 <?php foreach($member as $no => $_member): ?>
                 <tr>
@@ -62,6 +62,13 @@
                 </tr>
                 <?php endforeach ?>
             </table>
+
+            <div style="width:300px;margin-left:auto;text-align:center">
+            <b>DIKETAHUI</b>
+            <br><br>
+            <br><br>
+            <b>PENGAWAS</b>
+            </div>
         </div>
     </div>
 </div>
