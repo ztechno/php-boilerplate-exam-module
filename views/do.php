@@ -103,9 +103,9 @@ input[type="radio"] {
 })();
 
 
-window.onfocus = function () { 
-    window.location.reload()
-};
+// window.onfocus = function () { 
+//     window.location.reload()
+// };
 
 // document.onclick = function(){
 //     doFullScreen()
