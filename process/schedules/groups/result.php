@@ -9,8 +9,11 @@ $db = new Database;
 $db->query = "SELECT * FROM exam_schedules WHERE id = (SELECT schedule_id FROM exam_schedule_groups WHERE id = $schedule_group_id)";
 $schedule = $db->exec('single');
 
+$db->query = "SELECT * FROM exam_groups WHERE id = (SELECT group_id FROM exam_schedule_groups WHERE id = $schedule_group_id)";
+$group = $db->exec('single');
+
 // page section
-$title = "Hasil ".$schedule->name;
+$title = "Hasil ".$schedule->name.' - '. $group->name;
 Page::setTitle($title);
 Page::setBreadcrumbs([
     [
@@ -23,7 +26,7 @@ Page::setBreadcrumbs([
     ],
     [
         'url' => routeTo('crud/index', ['table' => 'exam_schedule_groups', 'filter' => ['schedule_id'=> $schedule->id]]),
-        'title' => $schedule->name
+        'title' => $schedule->name .' - '. $group->name
     ],
     [
         'title' => 'Hasil'
@@ -49,4 +52,4 @@ $db->query = "SELECT
                     users.id IN (SELECT user_id FROM exam_group_member WHERE group_id = exam_schedule_groups.group_id)";
 $member = $db->exec('all');
 
-return view('exam/views/schedules/groups/result', compact('member'));
+return view('exam/views/schedules/groups/result', compact('member', 'group'));

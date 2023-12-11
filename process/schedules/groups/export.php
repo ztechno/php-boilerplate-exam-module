@@ -8,6 +8,9 @@ $db = new Database;
 $db->query = "SELECT * FROM exam_schedules WHERE id = (SELECT schedule_id FROM exam_schedule_groups WHERE id = $schedule_group_id)";
 $schedule = $db->exec('single');
 
+$db->query = "SELECT * FROM exam_groups WHERE id = (SELECT group_id FROM exam_schedule_groups WHERE id = $schedule_group_id)";
+$group = $db->exec('single');
+
 $db->query = "SELECT 
                     users.id, 
                     users.name,
@@ -26,4 +29,4 @@ $db->query = "SELECT
                     users.id IN (SELECT user_id FROM exam_group_member WHERE group_id = exam_schedule_groups.group_id)";
 $member = $db->exec('all');
 
-return view('exam/views/schedules/groups/export', compact('member', 'schedule'));
+return view('exam/views/schedules/groups/export', compact('member', 'schedule', 'group'));
