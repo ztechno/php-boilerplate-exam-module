@@ -14,8 +14,24 @@ if(is_allowed(parsePath(routeTo('exam/do')), auth()->id) && $role->role_id == en
     $end_at     = strtotime($data->end_at);
     $now        = strtotime('now');
     $notStarted = $now < $start_at;
-    $finished   = $now > $end_at || $data->is_answered;
-    $button     .= $notStarted ? 'Belum Mulai' : ($finished ? '<a href="'.routeTo('exam/result',['id'=>$data->id]).'" class="btn btn-sm btn-primary">'.__('exam.label.result').'</a> ' : '<a href="'.$doUrl.'" class="btn btn-sm btn-primary" onclick="return validateToken(this)" data-token='.$data->token.'>'.__('exam.label.do').'</a> ');
+    $finished   = $data->is_answered;
+    $isDone     = $data->exam_user_status == 'DONE';
+    if($notStarted)
+    {
+        $button .= 'Belum Mulai';
+    }
+    else if($finished)
+    {
+        $button .= '<a href="'.routeTo('exam/result',['id'=>$data->id]).'" class="btn btn-sm btn-primary">'.__('exam.label.result').'</a> ';
+    }
+    else if($isDone)
+    {
+        $button .= 'Ujian Telah Selesai';
+    }
+    else
+    {
+        $button .= '<a href="'.$doUrl.'" class="btn btn-sm btn-primary" onclick="return validateToken(this)" data-token='.$data->token.'>'.__('exam.label.do').'</a> ';
+    }
 }
 
 if(is_allowed(parsePath(routeTo('crud/index',['table'=>'exam_schedule_groups'])), auth()->id))
