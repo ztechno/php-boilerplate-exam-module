@@ -17,6 +17,11 @@ if($schedule)
 {
     if(Request::isMethod('POST'))
     {
+        // delete existing answer
+        $db->delete('exam_member_answers', [
+            'schedule_id' => $schedule_id,
+            'user_id' => auth()->id
+        ]);
         // save jawaban
         $answers = isset($_POST['answer']) ? $_POST['answer'] : [];
         $db->update('exam_schedule_user_data', [
