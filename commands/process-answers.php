@@ -10,6 +10,7 @@ $db->query = "SELECT
             exam_schedule_user_data 
         WHERE 
             exam_schedule_user_data.answers IS NOT NULL AND
+            exam_schedule_user_data.status = 'DONE' AND
             (SELECT COUNT(*) FROM exam_member_answers WHERE exam_member_answers.schedule_id = exam_schedule_user_data.schedule_id AND exam_member_answers.user_id = exam_schedule_user_data.user_id) = 0
 ";
 
