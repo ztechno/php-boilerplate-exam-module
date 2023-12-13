@@ -152,5 +152,13 @@ initStorage()
 //         document.documentElement.requestFullscreen()
 //     }
 // }
+var refreshTime = 600000; // every 10 minutes in milliseconds
+window.setInterval( function() {
+    fetch('<?=routeTo('exam/refresh-session')?>')
+    .then(res => res.json())
+    .then(res => {
+        console.log(res.message)
+    })
+}, refreshTime );
 </script>
 <?php get_footer() ?>
