@@ -6,8 +6,12 @@ $user_id = $_GET['user_id'];
 $schedule_id = $_GET['schedule_id'];
 $db = new Database;
 
-$db->query = "DELETE FROM exam_member_answers WHERE schedule_id = $schedule_id AND user_id = $user_id;";
-$db->query .= "UPDATE exam_schedule_user_data SET `status` = NULL WHERE schedule_id = $schedule_id AND user_id = $user_id;";
+$db->delete('exam_member_answers', [
+    'schedule_id' => $schedule_id,
+    'user_id' => $user_id
+]);
+
+$db->query = "UPDATE exam_schedule_user_data SET `status` = NULL WHERE schedule_id = $schedule_id AND user_id = $user_id";
 $db->exec('multi_query');
 
 $user_group = $db->single('exam_group_member',[
