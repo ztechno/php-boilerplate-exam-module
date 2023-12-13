@@ -30,6 +30,15 @@ if(in_array($route,['crud/edit','crud/delete']) && $_GET['table'] == 'exam_quest
     }
 }
 
+if($route == 'exam/refresh-session')
+{
+    echo Response::json([
+        'message' => 'session refreshed'
+    ], 200);
+    die();
+    return true;
+}
+
 if($route == 'exam/test')
 {
     $db = new Database;
