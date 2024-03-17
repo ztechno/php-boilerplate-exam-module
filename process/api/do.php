@@ -1,15 +1,13 @@
 <?php
 
-use Core\Page;
 use Core\Request;
 use Core\Database;
+use Core\Response;
 
 $schedule_id = $_GET['schedule_id'];
 $db = new Database;
 $schedule = $db->single('exam_schedules',[
     'id' => $schedule_id,
-    // 'start_at' => ['<=', date('Y-m-d H:i:s')],
-    // 'end_at' => ['>=', date('Y-m-d H:i:s')],
 ]);
 
 if($schedule)
@@ -31,12 +29,7 @@ if($schedule)
             'user_id'     => auth()->id
         ]);
 
-        set_flash_msg(['success'=>"Ujian telah selesai"]);
-
-        header('location:'.routeTo('crud/index',[
-            'table' => 'exam_schedules'
-        ]));
-        die();
+        return Response::json([], 'Ujian telah selesai');
     }
 
     $now = strtotime('now');
@@ -51,10 +44,7 @@ if($schedule)
         ]);
         
         if($schedule_user_data)
-        {
-            $title = $schedule->name;
-            Page::setTitle($title);
-        
+        {        
             $schedule_user_data->data = json_decode($schedule_user_data->data);
 
             if(!$schedule_user_data->status)
@@ -66,25 +56,12 @@ if($schedule)
                     'user_id'     => auth()->id
                 ]);
             }
-        
-            return view('exam/views/do', compact('schedule_user_data','schedule'));
+
+            return Response::json(compact('schedule_user_data','schedule'), 'data retrieved');
         }
     }
-    else
-    {
-        set_flash_msg(['error'=>"Maaf! Waktu ujian telah selesai"]);
 
-        header('location:'.routeTo('crud/index',[
-            'table' => 'exam_schedules'
-        ]));
-        die();
-    }
+    return Response::json([], "Maaf! Waktu ujian telah selesai", 403);
 }
 
-
-set_flash_msg(['error'=>"Maaf! Data tidak valid"]);
-
-header('location:'.routeTo('crud/index',[
-    'table' => 'exam_schedules'
-]));
-die();
+return Response::json([], "Maaf! Data tidak valid", 403);
