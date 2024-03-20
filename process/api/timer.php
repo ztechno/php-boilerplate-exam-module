@@ -3,7 +3,7 @@
 use Core\Response;
 
 $timeFirst  = strtotime($_POST['from']);
-$timeSecond = strtotime($_POST['to']);
+$timeSecond = strtotime(date('Y-m-d H:i:s'));
 $differenceInSeconds = $timeSecond - $timeFirst;
 
 return Response::json([
