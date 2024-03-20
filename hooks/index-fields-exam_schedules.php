@@ -6,7 +6,8 @@ $role = get_role(auth()->id);
 
 $fields['schedule_status'] = [
     'label' => __('exam.label.schedule_status'),
-    'type'  => 'text'
+    'type'  => 'text',
+    'search' => false
 ];
 
 if($role->role_id == env('EXAM_MEMBER_ROLE_ID'))
