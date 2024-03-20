@@ -1,5 +1,7 @@
 <?php
 
+use Core\Request;
+
 $role = get_role(auth()->id);
 
 $fields['schedule_status'] = [
@@ -24,5 +26,15 @@ $fields['token'] = [
     'label' => 'Token',
     'type'  => 'text'
 ];
+
+if(Request::$isApiRoute)
+{
+    $fields = array_merge([
+        'id' => [
+            'label' => 'id',
+            'type'  => 'text'
+        ]
+    ], $fields);
+}
 
 return $fields;
