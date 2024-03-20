@@ -2,8 +2,8 @@
 
 use Core\Response;
 
-$timeFirst  = strtotime($_POST['end']);
-$timeSecond = strtotime(date('Y-m-d H:i:s'));
+$timeFirst  = strtotime(date('Y-m-d H:i:s'));
+$timeSecond = strtotime($_POST['end']);
 $differenceInSeconds = $timeSecond - $timeFirst;
 
 return Response::json([
