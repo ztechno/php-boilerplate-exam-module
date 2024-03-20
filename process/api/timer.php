@@ -2,7 +2,7 @@
 
 use Core\Response;
 
-$timeFirst  = strtotime($_POST['from']);
+$timeFirst  = strtotime($_POST['end']);
 $timeSecond = strtotime(date('Y-m-d H:i:s'));
 $differenceInSeconds = $timeSecond - $timeFirst;
 
