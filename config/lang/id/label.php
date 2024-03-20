@@ -45,4 +45,5 @@ return [
     'generate token' => 'Generate Token',
     'presence list' => 'Daftar Hadir',
     'preview' => 'Preview',
+    'schedule_status' => 'Status Jadwal'
 ];

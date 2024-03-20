@@ -70,6 +70,10 @@ return [
             'label' => __('exam.label.end_at'),
             'type'  => 'datetime-local'
         ],
+        'schedule_status' => [
+            'label' => __('exam.label.schedule_status'),
+            'type'  => 'text'
+        ],
         'status' => [
             'label' => __('exam.label.status'),
             'type'  => 'options:PUBLISH|DRAFT'
