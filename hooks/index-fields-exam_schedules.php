@@ -12,6 +12,11 @@ $fields['schedule_status'] = [
 
 if($role->role_id == env('EXAM_MEMBER_ROLE_ID'))
 {
+    $fields['exam_user_status'] = [
+        'label' => __('exam.label.exam_user_status'),
+        'type'  => 'text',
+        'search' => false
+    ];
     unset($fields['status']);
     unset($fields['question_showed']);
     unset($fields['randomize_question']);

@@ -45,5 +45,6 @@ return [
     'generate token' => 'Generate Token',
     'presence list' => 'Daftar Hadir',
     'preview' => 'Preview',
-    'schedule_status' => 'Status Jadwal'
+    'schedule_status' => 'Status Jadwal',
+    'exam_user_status' => 'Status Ujian'
 ];
