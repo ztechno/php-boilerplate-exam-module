@@ -31,7 +31,8 @@ foreach($user_data as $schedule_user_data)
     foreach($data as $d)
     {
         $answer_id = $answers && isset($answers[$d->id]) ? $answers[$d->id] : 0;
-        $query .= "INSERT INTO exam_member_answers(user_id,schedule_id,question_item_id,answer_id,score)VALUES($user_id,$schedule_id,$d->id,'$answer_id',(SELECT score FROM exam_question_answers WHERE id = '$answer_id'));";
+        $score = is_int($answer_id) ? "(SELECT score FROM exam_question_answers WHERE id = '$answer_id')" : NULL;
+        $query .= "INSERT INTO exam_member_answers(user_id,schedule_id,question_item_id,answer_id,score)VALUES($user_id,$schedule_id,$d->id,'$answer_id',$score);";
     }
     
     $db->query = $query;
