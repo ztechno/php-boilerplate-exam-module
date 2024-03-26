@@ -5,6 +5,12 @@ use Core\Response;
 
 $auth = auth();
 
+if(empty($auth))
+{
+    header('location:'.routeTo('auth/login'));
+    die;
+}
+
 if(in_array($route,['crud/edit','crud/delete']) && $_GET['table'] == 'exam_questions')
 {
     $db = new Database();
