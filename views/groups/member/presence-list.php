@@ -18,7 +18,7 @@
         <div class="card-content">
             <h2 align="center">
                 DAFTAR HADIR PESERTA<br>
-                PENILAIAN AKHIR SEMESTER<br>
+                PENILAIAN TENGAH SEMESTER GENAP<br>
                 TAHUN PELAJARAN 2023/2024
             </h2>
             <table cellpadding="5">
