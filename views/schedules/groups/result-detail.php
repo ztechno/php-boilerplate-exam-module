@@ -72,7 +72,7 @@ input[type="radio"] {
             <?php 
             if(empty($data->answers))
             {
-                echo isset($normalizeAnswers[$data->id]) ? $normalizeAnswers[$data->id]->answer_id . '<br>' . ($normalizeAnswers[$data->id]->score == null ? '<i>Belum diperiksa</i>' : $normalizeAnswers[$data->id]->score) : '';
+                echo isset($normalizeAnswers[$data->id]) ? $normalizeAnswers[$data->id]->answer_id . '<br><br>' . ($normalizeAnswers[$data->id]->score == null ? '<i>Belum diperiksa</i>' : ($normalizeAnswers[$data->id]->score != '0' ? '<span class="badge bg-success">Skor : '.$normalizeAnswers[$data->id]->score.'</span>' : '<span class="badge bg-danger">0</span>') ) : '';
             }
             else
             {
