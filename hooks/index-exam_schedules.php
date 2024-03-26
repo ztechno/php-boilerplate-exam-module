@@ -28,6 +28,8 @@ if($role->role_id == env('EXAM_MEMBER_ROLE_ID'))
     $additionalColumn .= ", (SELECT status FROM exam_schedule_user_data WHERE exam_schedule_user_data.schedule_id = exam_schedules.id AND exam_schedule_user_data.user_id = ".auth()->id.") as exam_user_status";
 }
 
+$where = $where ." ". $having;
+
 $db->query = "SELECT *, IF(randomize_question=1,'Ya','Tidak') randomize_question, IF(randomize_answer=1,'Ya','Tidak') randomize_answer $additionalColumn FROM $this->table $where $having ORDER BY ".$col_order." ".$order[0]['dir']." LIMIT $start,$length";
 $data  = $this->db->exec('all');
 
