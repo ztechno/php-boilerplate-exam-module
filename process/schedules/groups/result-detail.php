@@ -92,7 +92,7 @@ if($schedule_user_data)
         $totalScore += $answer->score;
     }
 
-    $correction = true;
+    $correction = 1;
 
     return view('exam/views/schedules/groups/result-detail', compact('schedule_user_data','normalizeAnswers','totalScore','correction'));
 }

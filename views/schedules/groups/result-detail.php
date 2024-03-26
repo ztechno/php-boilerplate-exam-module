@@ -74,7 +74,7 @@ input[type="radio"] {
             <?php 
             if(empty($data->answers))
             {
-                $correction = false;
+                $correction = $normalizeAnswers[$data->id]->score == NULL ? $correction*0 : $correction*1;
                 echo isset($normalizeAnswers[$data->id]) ? "<b>JAWABAN : </b>".$normalizeAnswers[$data->id]->answer_id . '<br><br>' . ($normalizeAnswers[$data->id]->score == null ? '<input type="number" class="form-control" name="score['.$data->id.']" value="0">' : ($normalizeAnswers[$data->id]->score != '0' ? '<span class="badge bg-success">Skor : '.$normalizeAnswers[$data->id]->score.'</span>' : '<span class="badge bg-danger">Skor : 0</span>') ) : '';
             }
             else
