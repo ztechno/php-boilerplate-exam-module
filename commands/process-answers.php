@@ -30,8 +30,9 @@ foreach($user_data as $schedule_user_data)
     // looping
     foreach($data as $d)
     {
-        $answer_id = $answers && isset($answers[$d->id]) ? $answers[$d->id] : 0;
-        $query .= "INSERT INTO exam_member_answers(user_id,schedule_id,question_item_id,answer_id,score)VALUES($user_id,$schedule_id,$d->id,$answer_id,(SELECT score FROM exam_question_answers WHERE id = $answer_id));";
+        $answer_id = $answers && isset($answers[$d->id]) ? $answers[$d->id] : NULL;
+        $score = $answer_id == NULL ? 0 : "(SELECT score FROM exam_question_answers WHERE id = $answer_id)";
+        $query .= "INSERT INTO exam_member_answers(user_id,schedule_id,question_item_id,answer_id,score)VALUES($user_id,$schedule_id,$d->id,$answer_id,$score);";
     }
     
     $db->query = $query;
