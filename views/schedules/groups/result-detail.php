@@ -69,7 +69,17 @@ input[type="radio"] {
                 <?php endforeach ?>
             </ul>
 
-            <?= isset($normalizeAnswers[$data->id]) && $normalizeAnswers[$data->id]->score ? '<span class="badge bg-success">Benar</span>' : '<span class="badge bg-danger">Salah</span>' ?>
+            <?php 
+            if(empty($data->answers))
+            {
+                echo isset($normalizeAnswers[$data->id]) ? $normalizeAnswers[$data->id]['answer_id'] . '<br>' . ($normalizeAnswers[$data->id]->score == null ? '<i>Belum diperiksa</i>' : $normalizeAnswers[$data->id]->score) : '';
+            }
+            else
+            {
+                echo isset($normalizeAnswers[$data->id]) && $normalizeAnswers[$data->id]->score ? '<span class="badge bg-success">Benar</span>' : '<span class="badge bg-danger">Salah</span>';
+            }
+            ?>
+
         </div>
     </div>
 </div>
