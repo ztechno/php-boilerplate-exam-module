@@ -1,6 +1,7 @@
 <?php get_header() ?>
-<div class="card">
+<div class="card mt-3">
     <div class="card-body">
+        <h1><?=$title?></h1>
         <a href="<?=routeTo('exam/schedules/groups/reset-all', ['schedule_group_id' => $_GET['schedule_group_id']])?>" class="btn btn-warning mb-2" onclick="if(confirm('Apakah anda yakin akan me-reset semua jawaban peserta ?')){return true}else{return false}">Reset All</a>
         <a href="<?=routeTo('exam/schedules/groups/export', ['schedule_group_id' => $_GET['schedule_group_id']])?>" class="btn btn-primary mb-2" target="_blank">Cetak</a>
         <div class="table-responsive table-hover table-sales">
@@ -23,7 +24,8 @@
                         <td><?=$user->status??'-'?></td>
                         <td>
                             <?php if($user->status): ?>
-                            <a href="<?=routeTo('exam/schedules/groups/reset',['user_id' => $user->id, 'schedule_id' => $user->schedule_id])?>" class="btn btn-warning">Reset</a>
+                                <a href="<?=routeTo('exam/schedules/groups/result-detail',['user_id' => $user->id, 'schedule_id' => $user->schedule_id])?>" class="btn btn-info"><i class="fa fa-eye"></i> Detail</a>
+                                <a href="<?=routeTo('exam/schedules/groups/reset',['user_id' => $user->id, 'schedule_id' => $user->schedule_id])?>" class="btn btn-warning">Reset</a>
                             <?php endif ?>
                         </td>
                     </tr>

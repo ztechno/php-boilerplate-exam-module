@@ -52,4 +52,4 @@ $db->query = "SELECT
                     users.id IN (SELECT user_id FROM exam_group_member WHERE group_id = exam_schedule_groups.group_id)";
 $member = $db->exec('all');
 
-return view('exam/views/schedules/groups/result', compact('member', 'group'));
+return view('exam/views/schedules/groups/result', compact('title', 'member', 'group'));

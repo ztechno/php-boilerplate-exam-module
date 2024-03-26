@@ -6,6 +6,10 @@ use Core\Database;
 $id = $_GET['id'];
 $db = new Database;
 
+$question = $db->single('exam_questions',[
+    'id' => $id
+]);
+
 $items = $db->all('exam_question_items',[
     'question_id' => $id
 ]);
@@ -19,7 +23,7 @@ $items = array_map(function($item) use ($db){
 }, $items);
 
 // page section
-$title = _ucwords(__("exam.label.preview"));
+$title = _ucwords(__("exam.label.preview")) .' - '.$question->name;
 Page::setActive("exam.exam_questions");
 Page::setTitle($title);
 Page::setModuleName($title);
