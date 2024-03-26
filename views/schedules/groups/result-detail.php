@@ -45,6 +45,8 @@ input[type="radio"] {
 }
 </style>
 <h4>Nilai : <?=($totalScore/count($schedule_user_data->data))*100?></h4>
+<form method="POST">
+<?= csrf_field() ?>
 <?php foreach($schedule_user_data->data as $index => $data): ?>
 <div class="card mb-3">
     <div class="card-header d-flex flex-grow-1 align-items-center">
@@ -72,7 +74,8 @@ input[type="radio"] {
             <?php 
             if(empty($data->answers))
             {
-                echo isset($normalizeAnswers[$data->id]) ? "<b>JAWABAN : </b>".$normalizeAnswers[$data->id]->answer_id . '<br><br>' . ($normalizeAnswers[$data->id]->score == null ? '<i>Belum diperiksa</i>' : ($normalizeAnswers[$data->id]->score != '0' ? '<span class="badge bg-success">Skor : '.$normalizeAnswers[$data->id]->score.'</span>' : '<span class="badge bg-danger">0</span>') ) : '';
+                $correction = false;
+                echo isset($normalizeAnswers[$data->id]) ? "<b>JAWABAN : </b>".$normalizeAnswers[$data->id]->answer_id . '<br><br>' . ($normalizeAnswers[$data->id]->score == null ? '<input type="number" class="form-control" name="score['.$data->id.']" value="0">' : ($normalizeAnswers[$data->id]->score != '0' ? '<span class="badge bg-success">Skor : '.$normalizeAnswers[$data->id]->score.'</span>' : '<span class="badge bg-danger">0</span>') ) : '';
             }
             else
             {
@@ -84,5 +87,10 @@ input[type="radio"] {
     </div>
 </div>
 <?php endforeach ?>
+
+<?php if(!$correction): ?>
+<button class="btn btn-primary">Submit</button>
+<?php endif ?>
+</form>
 
 <?php get_footer() ?>

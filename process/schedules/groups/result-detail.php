@@ -2,6 +2,7 @@
 
 use Core\Page;
 use Core\Database;
+use Core\Request;
 
 $user_id = $_GET['user_id'];
 $schedule_id = $_GET['schedule_id'];
@@ -23,6 +24,27 @@ $scheduleGroup =  $db->single('exam_schedule_groups',[
     'schedule_id' => $schedule_id,
     'group_id' => $userGroup->group_id
 ]);
+
+if(Request::isMethod('POST'))
+{
+    $answers = $_POST['answers'];
+    foreach($answers as $question_id => $score)
+    {
+        $db->update('exam_member_answers', [
+            'score' => $score
+        ], [
+            'schedule_id' => $schedule_id,
+            'user_id' => $user_id,
+            'question_item_id' => $question_id
+        ]);
+    }
+
+    header('location:'.routeTo('exam/schedules/groups/result-detail',[
+        'schedule_id' => $schedule_id,
+        'user_id' => $user_id,
+    ]));
+    die;
+}
 
 // page section
 $title = 'Detail Ujian - '.$schedule->name.' - '.$user->name;
@@ -70,7 +92,7 @@ if($schedule_user_data)
         $totalScore += $answer->score;
     }
 
-    return view('exam/views/schedules/groups/result-detail', compact('schedule_user_data','normalizeAnswers','totalScore'));
-}
+    $correction = true;
 
-// return view('exam/views/schedules/groups/result', compact('title', 'member', 'group'));
+    return view('exam/views/schedules/groups/result-detail', compact('schedule_user_data','normalizeAnswers','totalScore','correction'));
+}
