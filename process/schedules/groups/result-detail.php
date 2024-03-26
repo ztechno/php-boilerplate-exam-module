@@ -27,7 +27,7 @@ $scheduleGroup =  $db->single('exam_schedule_groups',[
 
 if(Request::isMethod('POST'))
 {
-    $answers = $_POST['answers'];
+    $answers = $_POST['score'];
     foreach($answers as $question_id => $score)
     {
         $db->update('exam_member_answers', [
