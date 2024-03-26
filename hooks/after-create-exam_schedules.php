@@ -1,20 +1,20 @@
 <?php
 
-// foreach($_POST['group'] as $groupId)
-// {
-//     $db->insert('exam_schedule_groups', [
-//         'schedule_id' => $data->id,
-//         'group_id'    => $groupId
-//     ]);
-// }
+foreach($_POST['group'] as $groupId)
+{
+    $db->insert('exam_schedule_groups', [
+        'schedule_id' => $data->id,
+        'group_id'    => $groupId
+    ]);
+}
 
-// if(!empty($_POST['question']))
-// {
-//     $db->insert('exam_schedule_questions',[
-//         'schedule_id' => $data->id,
-//         'question_id' => $_POST['question']
-//     ]);
-// }
+if(!empty($_POST['question']))
+{
+    $db->insert('exam_schedule_questions',[
+        'schedule_id' => $data->id,
+        'question_id' => $_POST['question']
+    ]);
+}
 
 // // generate user data
 // $schedule = $data;
