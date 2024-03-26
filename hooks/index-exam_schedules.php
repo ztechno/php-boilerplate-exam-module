@@ -29,12 +29,12 @@ if($role->role_id == env('EXAM_MEMBER_ROLE_ID'))
 }
 
 $where = $where ." ". $having;
+$baseQuery = "SELECT *, IF(randomize_question=1,'Ya','Tidak') randomize_question, IF(randomize_answer=1,'Ya','Tidak') randomize_answer $additionalColumn FROM $this->table $where ORDER BY ".$col_order." ".$order[0]['dir'];
+$db->query = $baseQuery." LIMIT $start,$length";
 
-$db->query = "SELECT *, IF(randomize_question=1,'Ya','Tidak') randomize_question, IF(randomize_answer=1,'Ya','Tidak') randomize_answer $additionalColumn FROM $this->table $where ORDER BY ".$col_order." ".$order[0]['dir']." LIMIT $start,$length";
 $data  = $this->db->exec('all');
 
-$total = $this->db->exists($this->table,$where,[
-    $col_order => $order[0]['dir']
-]);
+$this->db->query = $baseQuery;
+$total = $this->db->exec('exists');
 
 return compact('data','total');
