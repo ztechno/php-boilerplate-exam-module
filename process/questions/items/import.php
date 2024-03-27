@@ -59,23 +59,27 @@ if(Request::isMethod('POST'))
         ]);
 
         $answer_score = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
-        $correct = array_search($answer_score, $alphabet);
-        
-        for($ansCol=4;$ansCol<=$highestColumnIndex;$ansCol++)
+
+        if($answer_score)
         {
-            $normalizeColumn = $ansCol - 4;
-            $answer = $worksheet->getCellByColumnAndRow($ansCol, $row)->getValue();
-            foreach($allFiles as $file)
+            $correct = array_search($answer_score, $alphabet);
+            
+            for($ansCol=4;$ansCol<=$highestColumnIndex;$ansCol++)
             {
-                $fileLocation = asset('storage/'.$question_id.'/'.$file);
-                $description = str_replace('{'.$file.'}','<img src="'.$fileLocation.'" width="100%">', $description);
-                $answer = str_replace('{'.$file.'}','<img src="'.$fileLocation.'" width="100%">', $answer);
+                $normalizeColumn = $ansCol - 4;
+                $answer = $worksheet->getCellByColumnAndRow($ansCol, $row)->getValue();
+                foreach($allFiles as $file)
+                {
+                    $fileLocation = asset('storage/'.$question_id.'/'.$file);
+                    $description = str_replace('{'.$file.'}','<img src="'.$fileLocation.'" width="100%">', $description);
+                    $answer = str_replace('{'.$file.'}','<img src="'.$fileLocation.'" width="100%">', $answer);
+                }
+                $db->insert('exam_question_answers',[
+                    'item_id' => $question_item->id,
+                    'description' => $answer,
+                    'score' => $normalizeColumn == $correct ? 1 : 0
+                ]);
             }
-            $db->insert('exam_question_answers',[
-                'item_id' => $question_item->id,
-                'description' => $answer,
-                'score' => $normalizeColumn == $correct ? 1 : 0
-            ]);
         }
     }
 
