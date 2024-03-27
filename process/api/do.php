@@ -35,7 +35,7 @@ if($schedule)
     $now = strtotime('now');
     $startAt = strtotime($schedule->start_at);
     $endAt = strtotime($schedule->end_at);
-    $is_finished = $startAt <= $now && $endAt >= $now;
+    $is_finished = $now > $endAt;
     $schedule_user_data = $db->single('exam_schedule_user_data', [
         'schedule_id' => $schedule_id,
         'user_id'     => auth()->id
