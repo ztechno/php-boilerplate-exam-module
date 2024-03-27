@@ -35,28 +35,33 @@ if($schedule)
     $now = strtotime('now');
     $startAt = strtotime($schedule->start_at);
     $endAt = strtotime($schedule->end_at);
-    $is_finished = $startAt <= $now && $endAt >= $now;
-    $schedule_user_data = $db->single('exam_schedule_user_data', [
-        'schedule_id' => $schedule_id,
-        'user_id'     => auth()->id
-    ]);
-    
-    if($schedule_user_data)
-    {        
-        $schedule_user_data->data = json_decode($schedule_user_data->data);
+    if($startAt <= $now && $endAt >= $now)
+    {
 
-        if(!$schedule_user_data->status)
-        {
-            $db->update('exam_schedule_user_data', [
-                'status' => 'ON PROGRESS'
-            ], [
-                'schedule_id' => $schedule_id,
-                'user_id'     => auth()->id
-            ]);
+        $schedule_user_data = $db->single('exam_schedule_user_data', [
+            'schedule_id' => $schedule_id,
+            'user_id'     => auth()->id
+        ]);
+        
+        if($schedule_user_data)
+        {        
+            $schedule_user_data->data = json_decode($schedule_user_data->data);
+
+            if(!$schedule_user_data->status)
+            {
+                $db->update('exam_schedule_user_data', [
+                    'status' => 'ON PROGRESS'
+                ], [
+                    'schedule_id' => $schedule_id,
+                    'user_id'     => auth()->id
+                ]);
+            }
+
+            return Response::json(compact('schedule_user_data','schedule'), 'data retrieved');
         }
-
-        return Response::json(compact('schedule_user_data','schedule','is_finished'), 'data retrieved');
     }
+
+    return Response::json([], "Maaf! Waktu ujian telah selesai", 403);
 }
 
 return Response::json([], "Maaf! Data tidak valid", 403);
