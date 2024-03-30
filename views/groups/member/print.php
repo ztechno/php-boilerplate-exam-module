@@ -29,11 +29,11 @@
             <h4 align="center"><u>KARTU PESERTA UJIAN</u></h4>
             <table cellpadding="5" cellspacing="0" width="100%" align="center">
                 <tr>
-                    <td rowspan="3" width="100px">
+                    <td rowspan="3" width="80px">
                         <img src="<?=asset('assets/exam/image-placeholder.jpeg')?>" alt="" width="80px">
                     </td>
                     <td>
-                    <table cellpadding="5" cellspacing="0" width="100%" align="center" style="margin-left:10px">
+                    <table cellpadding="5" cellspacing="0" width="100%" align="center" style="margin-left:8px">
                         <tr>
                             <td width="100px"><b>Nama</b></td>
                             <td><?= $_member->name?></td>
