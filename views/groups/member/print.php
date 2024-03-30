@@ -43,6 +43,10 @@
                             <td><?= $_member->group_name?></td>
                         </tr>
                         <tr>
+                            <td width="100px"><b>Ruangan Ujian</b></td>
+                            <td><?= $_member->exam_room?></td>
+                        </tr>
+                        <tr>
                             <td><b>Username</b></td>
                             <td><?= $_member->username?></td>
                         </tr>

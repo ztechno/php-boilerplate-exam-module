@@ -28,23 +28,58 @@ if(Request::isMethod('POST'))
         $name = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
         $username = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
         $password = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+        $exam_room = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
 
-        // create question
-        $user = $db->insert('users', [
-            'name' => $name,
-            'username' => $username,
-            'password' => md5($password),
-        ]);
+        // check user
+        if($db->exists('users',[
+            'username' => $username
+        ]))
+        {
+            // user exists
+            // check exam group member
+            if($db->exists('exam_group_member',[
+                'user_id' => $user->id,
+                'group_id' => $group_id
+            ]))
+            {
+                $db->update('exam_group_member',[
+                    'exam_room' => $exam_room
+                ],[
+                    'user_id' => $user->id,
+                    'group_id' => $group_id
+                ]);
+            }
+            else
+            {
+                $db->insert('exam_group_member',[
+                    'user_id' => $user->id,
+                    'group_id' => $group_id,
+                    'exam_room' => $exam_room
+                ]);
+            }
+        }
+        else
+        {
+            // create users
+            $user = $db->insert('users', [
+                'name' => $name,
+                'username' => $username,
+                'password' => md5($password),
+            ]);
 
-        $db->insert('user_roles', [
-            'user_id' => $user->id,
-            'role_id' => env('EXAM_MEMBER_ROLE_ID')
-        ]);
+            $db->insert('user_roles', [
+                'user_id' => $user->id,
+                'role_id' => env('EXAM_MEMBER_ROLE_ID')
+            ]);
+            
+            $db->insert('exam_group_member',[
+                'user_id' => $user->id,
+                'group_id' => $group_id,
+                'exam_room' => $exam_room
+            ]);
+        }
+        
 
-        $db->insert('exam_group_member',[
-            'user_id' => $user->id,
-            'group_id' => $group_id
-        ]);
     }
 
     set_flash_msg(['success'=>"Import peserta berhasil"]);

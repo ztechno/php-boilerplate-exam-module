@@ -16,6 +16,10 @@ return [
             'label' => __('exam.label.user'),
             'type'  => 'options-obj:users,id,name'
         ],
+        'exam_room' => [
+            'label' => __('exam.label.exam_room'),
+            'type'  => 'text'
+        ]
     ],
     'exam_questions'  => [
         'name' => [

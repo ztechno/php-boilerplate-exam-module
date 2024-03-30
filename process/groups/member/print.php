@@ -16,7 +16,8 @@ $db->query  = "SELECT
                  users.name, 
                  username,
                  exam_groups.id group_id,
-                 exam_groups.name group_name
+                 exam_groups.name group_name,
+                 exam_group_member.exam_room exam_room
                 FROM 
                  users
                 JOIN
