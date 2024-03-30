@@ -43,7 +43,7 @@
                             <td><?= $_member->group_name?></td>
                         </tr>
                         <tr>
-                            <td width="100px"><b>Ruangan Ujian</b></td>
+                            <td width="100px"><b>Ruangan</b></td>
                             <td><?= $_member->exam_room?></td>
                         </tr>
                         <tr>
