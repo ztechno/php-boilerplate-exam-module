@@ -26,8 +26,7 @@ if(Request::isMethod('POST'))
 
     for ($row = 2; $row <= $highestRow; $row++) { 
         $name = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
-        // $username = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
-        // $password = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+        $group_id = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
         $exam_room = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
 
         // check user
