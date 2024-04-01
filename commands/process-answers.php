@@ -32,8 +32,7 @@ foreach($user_data as $schedule_user_data)
     {
         $answer_id = $answers && isset($answers[$d->id]) ? $answers[$d->id] : 0;
         $score = "(CASE WHEN (SELECT COUNT(*) FROM exam_question_answers WHERE item_id = $d->id) > 0 THEN (SELECT score FROM exam_question_answers WHERE id = '$answer_id') ELSE NULL END)";
-        $answer_id = htmlspecialchars( $answer_id );
-        $query .= "INSERT INTO exam_member_answers(user_id,schedule_id,question_item_id,answer_id,score)VALUES($user_id,$schedule_id,$d->id,'$answer_id',$score);";
+        $query .= 'INSERT INTO exam_member_answers(user_id,schedule_id,question_item_id,answer_id,score)VALUES('.$user_id.','.$schedule_id.','.$d->id.',"'.$answer_id.'",'.$score.');';
     }
     
     $db->query = $query;
