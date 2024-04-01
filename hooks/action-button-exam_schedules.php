@@ -120,22 +120,22 @@ if(is_allowed(parsePath($questionUrl), auth()->id))
     
 }
 
-if(is_allowed(parsePath($generateUrl), auth()->id))
-{
-    if($isApiRoute)
-    {
-        $button[] = [
-            'name'   => 'generate',
-            'label'  => __('exam.label.generate'),
-            'route'  => 'exam/schedules/generate',
-            'params' => ['schedule_id' => $data->id]
-        ];
-    }
-    else
-    {
-        $button .= '<a href="'.$generateUrl.'" class="btn btn-sm btn-primary"> '.__('exam.label.generate').'</a> ';
-    }
-}
+// if(is_allowed(parsePath($generateUrl), auth()->id))
+// {
+//     if($isApiRoute)
+//     {
+//         $button[] = [
+//             'name'   => 'generate',
+//             'label'  => __('exam.label.generate'),
+//             'route'  => 'exam/schedules/generate',
+//             'params' => ['schedule_id' => $data->id]
+//         ];
+//     }
+//     else
+//     {
+//         $button .= '<a href="'.$generateUrl.'" class="btn btn-sm btn-primary"> '.__('exam.label.generate').'</a> ';
+//     }
+// }
 
 if(is_allowed(parsePath($generateTokenUrl), auth()->id))
 {
