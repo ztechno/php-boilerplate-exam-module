@@ -54,9 +54,9 @@ if($schedule)
                 'user_id'     => auth()->id
             ]);
         }
+
+        return Response::json(compact('schedule_user_data','schedule','is_finished'), 'data retrieved');
     }
-    
-    return Response::json(compact('schedule_user_data','schedule','is_finished'), 'data retrieved');
 }
 
 return Response::json([], "Maaf! Data tidak valid", 403);
