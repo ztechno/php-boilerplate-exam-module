@@ -33,7 +33,7 @@ foreach($items as $index => $item)
     // $answers = $db->all('exam_question_answers', ['item_id' => $item->id]);
     foreach(range('a', 'e') as $alpha)
     {
-        $filename = 'q-'.$item->id.'/'.$no.$alpha.'.png';
+        $filename = 'q-'.$question_id.'/'.$no.$alpha.'.png';
         if(Storage::exists($filename))
         {
             echo $filename."\n";
