@@ -38,5 +38,9 @@ foreach($items as $index => $item)
         {
             echo $filename."\n";
         }
+        else
+        {
+            $filename . " not exists \n";
+        }
     }
 }
