@@ -16,7 +16,7 @@ $parent_path = Utility::parentPath();
 $db = new Database;
 
 // get questions
-$question = $db->single('exam_question_items', ['id' => $question_id]);
+$question = $db->single('exam_questions', ['id' => $question_id]);
 
 if(empty($question))
 {
