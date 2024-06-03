@@ -28,6 +28,7 @@ echo "Question found : ".$question->name."\n";
 $items = $db->all('exam_question_items', ['question_id' => $question->id]);
 foreach($items as $index => $item)
 {
+    echo "Item found : ".$item->description."\n";
     $no = $index + 1;
     $answers = $db->all('exam_question_answers', ['item_id' => $item->id]);
     foreach(range('a', 'e') as $alpha)
