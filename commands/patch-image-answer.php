@@ -36,7 +36,13 @@ foreach($items as $index => $item)
         $filename = 'q-'.$question_id.'/'.$no.$alpha.'.png';
         if(Storage::exists($filename))
         {
-            echo $filename."\n";
+            // echo $filename."\n";
+            $fileLocation = asset('storage/'.$filename);
+            $db->insert('exam_question_answers',[
+                'item_id' => $item->id,
+                'description' => '<img src="'.$fileLocation.'" width="100%">',
+                'score' => 0
+            ]);
         }
         else
         {
