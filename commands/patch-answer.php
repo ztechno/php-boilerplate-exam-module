@@ -30,7 +30,7 @@ foreach($items as $index => $item)
 {
     echo "Item found : ".$item->description."\n";
     $no = $index + 1;
-    $answers = $db->all('exam_question_answers', ['item_id' => $item->id]);
+    // $answers = $db->all('exam_question_answers', ['item_id' => $item->id]);
     foreach(range('a', 'e') as $alpha)
     {
         $filename = 'q-'.$item->id.'/'.$no.$alpha.'.png';
@@ -40,7 +40,7 @@ foreach($items as $index => $item)
         }
         else
         {
-            $filename . " not exists \n";
+            echo $filename . " not exists \n";
         }
     }
 }
