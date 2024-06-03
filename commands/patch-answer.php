@@ -16,7 +16,7 @@ $parent_path = Utility::parentPath();
 $db = new Database;
 
 // get questions
-$questions = $db->all('exam_question_items', ['id' => $question_id]);
+$questions = $db->all('exam_question_items', ['question_id' => $question_id]);
 foreach($questions as $index => $question)
 {
     $no = $index + 1;
