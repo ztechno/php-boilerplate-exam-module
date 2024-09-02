@@ -35,22 +35,22 @@ if(is_allowed(parsePath(routeTo('exam/do')), auth()->id) && $role->role_id == en
             $button .= 'Belum Mulai';
         }
     }
-    // else if($finished)
-    // {
-    //     if($isApiRoute)
-    //     {
-    //         $button[] = [
-    //             'name'   => 'action',
-    //             'label'  => __('exam.label.result'),
-    //             'route'  => 'exam/result',
-    //             'params' => ['id'=>$data->id]
-    //         ];
-    //     }
-    //     else
-    //     {
-    //         $button .= '<a href="'.routeTo('exam/result',['id'=>$data->id]).'" class="btn btn-sm btn-primary">'.__('exam.label.result').'</a> ';
-    //     }
-    // }
+    else if($finished)
+    {
+        if($isApiRoute)
+        {
+            $button[] = [
+                'name'   => 'action',
+                'label'  => __('exam.label.result'),
+                'route'  => 'exam/result',
+                'params' => ['id'=>$data->id]
+            ];
+        }
+        else
+        {
+            $button .= '<a href="'.routeTo('exam/result',['id'=>$data->id]).'" class="btn btn-sm btn-primary">'.__('exam.label.result').'</a> ';
+        }
+    }
     else if($isDone || $finished)
     {
         if($isApiRoute)

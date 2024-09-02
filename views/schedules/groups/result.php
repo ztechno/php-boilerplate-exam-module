@@ -20,7 +20,7 @@
                     <tr>
                         <td><?=$index+1?></td>
                         <td><?=$user->name?></td>
-                        <td><?=$user->final_score??'<i>Belum ada nilai</i>'?></td>
+                        <td><?=$user->final_score?ceil($user->final_score):'<i>Belum ada nilai</i>'?></td>
                         <td><?=$user->status??'-'?></td>
                         <td>
                             <?php if($user->status): ?>
