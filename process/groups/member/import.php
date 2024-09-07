@@ -30,6 +30,8 @@ if(Request::isMethod('POST'))
         $password = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
         $exam_room = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
 
+        if(empty($name) || $name == '' || is_null($name)) break;
+
         // check user
         if($db->exists('users',[
             'username' => $username

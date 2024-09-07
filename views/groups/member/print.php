@@ -24,9 +24,11 @@
 <div class="card-container">
     <?php foreach($member as $_member): ?>
     <div class="card-item">
-        <img src="<?=asset('assets/exam/top.jpg')?>" alt="" width="100%">
+        <?php if(getSetting('exam_kop')): ?>
+        <img src="<?=getSetting('exam_kop')?>" alt="" width="100%">
+        <?php endif ?>
         <div class="card-content">
-            <h4 align="center"><u>KARTU PESERTA UJIAN</u></h4>
+            <h4 align="center" style="margin-bottom: 8px"><u>KARTU PESERTA UJIAN</u></h4>
             <table cellpadding="5" cellspacing="0" width="100%" align="center">
                 <tr>
                     <td rowspan="3" width="80px">

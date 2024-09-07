@@ -25,7 +25,7 @@
                 <tr>
                     <td>Nama Sekolah</td>
                     <td>:</td>
-                    <td>SMK Negeri 1 Pulau Rakyat</td>
+                    <td><?=env('APP_NAME')?></td>
                 </tr>
                 <tr>
                     <td>Hari</td>

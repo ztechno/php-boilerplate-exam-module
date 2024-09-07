@@ -45,6 +45,7 @@ if(Request::isMethod('POST'))
     $alphabet = range('A', 'Z');
     for ($row = 2; $row <= $highestRow; $row++) { 
         $description = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+        if(empty($description) || $description == '' || is_null($description)) break;
 
         foreach($allFiles as $file)
         {
