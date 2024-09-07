@@ -17,15 +17,13 @@
     <div class="card-item">
         <div class="card-content">
             <h2 align="center">
-                DAFTAR HADIR PESERTA<br>
-                PENILAIAN TENGAH SEMESTER GENAP<br>
-                TAHUN PELAJARAN 2023/2024
+                <?= getSetting('exam_print_header_text') ?>
             </h2>
             <table cellpadding="5">
                 <tr>
                     <td>Nama Sekolah</td>
                     <td>:</td>
-                    <td><?=env('APP_NAME')?></td>
+                    <td><?=getSetting('application_name')?></td>
                 </tr>
                 <tr>
                     <td>Hari</td>
