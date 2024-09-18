@@ -21,13 +21,8 @@ if($schedule)
         ]);
         // save jawaban
         $answers = isset($_POST['answer']) ? $_POST['answer'] : [];
-        $db->update('exam_schedule_user_data', [
-            'answers' => json_encode($answers),
-            'status'  => 'DONE'
-        ], [
-            'schedule_id' => $schedule_id,
-            'user_id'     => auth()->id
-        ]);
+        $db->query = "UPDATE exam_schedule_user_data SET `status` = 'DONE', answers = ? WHERE schedule_id = $schedule_id AND user_id = ". auth()->id;
+        $db->exec(false, [json_encode($answers)]);
 
         return Response::json([], 'Ujian telah selesai');
     }
