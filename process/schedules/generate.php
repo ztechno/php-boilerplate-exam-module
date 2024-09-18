@@ -1,5 +1,6 @@
 <?php
 
+use Core\Utility;
 use Core\Database;
 
 $schedule_id = $_GET['schedule_id'];
@@ -15,6 +16,7 @@ $schedule->question = $db->single('exam_questions', "id = (SELECT question_id FR
 
 $db->query = "SELECT * FROM users WHERE id IN (SELECT user_id FROM exam_group_member WHERE group_id IN (SELECT group_id FROM exam_schedule_groups WHERE schedule_id = $schedule_id))";
 $users = $db->exec('all');
+// $item_collections = [];
 foreach($users as $user)
 {    
     $db->query = "SELECT * FROM exam_question_items WHERE question_id = ".$schedule->question->id;
@@ -44,14 +46,12 @@ foreach($users as $user)
         return $item;
     }, $items);
 
-    $db->insert('exam_schedule_user_data', [
-        'schedule_id' => $schedule_id,
-        'user_id' => $user->id,
-        'data' => json_encode($items)
-    ]);
+    $data = json_encode($items);
+    $db->query = "INSERT INTO exam_schedule_user_data (schedule_id, user_id, `data`) VALUES ($schedule_id, $user->id, ?)";
+    $db->exec(false, [$data]);
 }
 
-set_flash_msg(['success'=>"Berhasil generate"]);
+set_flash_msg(['success'=>"Berhasil generate ". $schedule->name]);
 
 header('location:'.routeTo('crud/index',[
     'table' => 'exam_schedules'

@@ -52,11 +52,9 @@ foreach($users as $user)
         return $item;
     }, $items);
 
-    $db->insert('exam_schedule_user_data', [
-        'schedule_id' => $schedule_id,
-        'user_id' => $user->id,
-        'data' => json_encode($items)
-    ]);
+    $data = json_encode($items);
+    $db->query = "INSERT INTO exam_schedule_user_data (schedule_id, user_id, `data`) VALUES ($schedule_id, $user->id, ?)";
+    $db->exec(false, [$data]);
 }
 
 echo "$schedule->name generate success\n";
