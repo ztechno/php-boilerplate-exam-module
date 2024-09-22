@@ -68,7 +68,7 @@ if(Request::isMethod('POST'))
             for($ansCol=4;$ansCol<=$highestColumnIndex;$ansCol++)
             {
                 $normalizeColumn = $ansCol - 4;
-                $answer = $worksheet->getCellByColumnAndRow($ansCol, $row)->getValue();
+                $answer = htmlspecialchars($worksheet->getCellByColumnAndRow($ansCol, $row)->getValue());
                 foreach($allFiles as $file)
                 {
                     $fileLocation = asset('storage/'.$question_id.'/'.$file);
