@@ -25,7 +25,7 @@
                         <td>
                             <?php if($user->status): ?>
                                 <a href="<?=routeTo('exam/schedules/groups/result-detail',['user_id' => $user->id, 'schedule_id' => $user->schedule_id])?>" class="btn btn-info"><i class="fa fa-eye"></i> Detail</a>
-                                <a href="<?=routeTo('exam/schedules/groups/reset',['user_id' => $user->id, 'schedule_id' => $user->schedule_id])?>" class="btn btn-warning">Reset</a>
+                                <a href="<?=routeTo('exam/schedules/groups/reset',['user_id' => $user->id, 'schedule_id' => $user->schedule_id])?>" class="btn btn-warning" onclick="if(confirm('Apakah anda yakin akan mereset ujian pada siswa ini ?')){ return true }else{ return false }">Reset</a>
                             <?php endif ?>
                         </td>
                     </tr>
