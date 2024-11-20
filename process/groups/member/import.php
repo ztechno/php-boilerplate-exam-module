@@ -29,6 +29,7 @@ if(Request::isMethod('POST'))
         $username = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
         $password = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
         $exam_room = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+        $exam_room = !empty($exam_room) ? $exam_room : 1;
 
         if(empty($name) || $name == '' || is_null($name)) break;
 
