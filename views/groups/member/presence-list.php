@@ -19,7 +19,7 @@
             <h2 align="center">
                 <?= getSetting('exam_print_header_text') ?>
             </h2>
-            <table cellpadding="5">
+            <table cellpadding="0">
                 <tr>
                     <td>Nama Sekolah</td>
                     <td>:</td>
@@ -44,10 +44,10 @@
             <table cellpadding="5" cellspacing="0" width="100%" align="center" border="1" style="margin:0">
                 <tr>
                     <th width="20px">NO</th>
-                    <th width="100px">NIS</th>
-                    <th width="350px">NAMA</th>
-                    <th colspan="2" width="350px">TANDA TANGAN</th>
-                    <th width="100px">KET</th>
+                    <th width="50px">NIS</th>
+                    <th width="200px">NAMA</th>
+                    <th colspan="2">TANDA TANGAN</th>
+                    <th width="50px">KET</th>
                 </tr>
                 <?php foreach($member as $no => $_member): ?>
                 <tr>

@@ -22,7 +22,7 @@ function examDashboardStatistic()
     return view('exam/views/dashboard/statistic', compact('data'));
 }
 
-function generateQuestionSchedule($schedule_id)
+function generateQuestionSchedule($schedule_id, $message = true)
 {
     $db = new Database;
 
@@ -69,5 +69,49 @@ function generateQuestionSchedule($schedule_id)
         $db->exec(false, [$data]);
     }
 
-    echo "$schedule->name generate success\n";
+    $msg = "$schedule->name generate success\n";
+    if($message)
+    {
+        echo $msg;
+    }
+    
+    return $msg;
+}
+
+// Fungsi untuk memparsing soal
+function parseSoal($text) {
+    // Pisahkan soal berdasarkan baris
+    $lines = explode("\n", $text);
+    
+    // Inisialisasi array untuk soal
+    $soalList = [];
+
+    // Proses setiap 9 baris menjadi satu soal
+    for ($i = 0; $i < count($lines); $i += 9) {
+        // Pastikan ada cukup baris untuk soal
+        // if ($i + 8 < count($lines)) {
+            // Inisialisasi soal
+            $soal = [];
+            
+            // Deskripsi soal
+            $soal['description'] = trim($lines[$i + 1]);
+
+            // Pilihan jawaban
+            $pilihan = [];
+            $kunci_jawaban = strtolower(trim(substr($lines[$i + 7], 14))); // Mengambil kunci jawaban setelah "Kunci Jawaban: "
+            for ($j = 2; $j <= 6; $j++) {
+                $alphabet = strtolower(substr($lines[$i + $j], 0, 1));
+                $pilihan[$alphabet] = [
+                    'description' => substr($lines[$i + $j], 3),
+                    'score' => $alphabet == $kunci_jawaban
+                ];
+            }
+            $soal['answers'] = $pilihan;
+            
+            // Simpan soal ke dalam list
+            $soalList[] = $soal;
+        // }
+    }
+
+    return $soalList;
 }

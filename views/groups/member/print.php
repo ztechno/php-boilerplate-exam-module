@@ -20,6 +20,22 @@
 .card-content {
     padding:20px;
 }
+
+@media print {
+    .card-item {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .card-container {
+    page-break-inside: avoid;
+  }
+  
+  @page {
+    size: 210mm 330mm; /* Ukuran F4 */
+    margin: 10mm;       /* Sesuaikan margin */
+  }
+}
 </style>
 <div class="card-container">
     <?php foreach($member as $_member): ?>

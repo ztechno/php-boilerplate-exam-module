@@ -133,10 +133,10 @@ if(is_allowed(parsePath($generateUrl), auth()->id))
     }
     else
     {
-        if(isset($_GET['generate']))
-        {
+        // if(isset($_GET['generate']))
+        // {
             $button .= '<a href="'.$generateUrl.'" class="btn btn-sm btn-secondary" onclick="if(confirm(\'Tombol ini akan menghapus data soal yang sudah digenerate. Apakah anda yakin ?\')){return true}else{return false}"> '.__('exam.label.generate').'</a> ';
-        }
+        // }
     }
 }
 

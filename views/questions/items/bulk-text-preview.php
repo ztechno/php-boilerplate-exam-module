@@ -1,8 +1,7 @@
 <?php get_header() ?>
 <style>
 .card-body img {
-    max-width:450px;
-    height: auto;
+    max-width:300px;
     display:block;
     margin-top:10px;
 }
@@ -45,25 +44,24 @@ input[type="radio"] {
     opacity: 0;
 }
 </style>
-<?php foreach($items as $index => $item): ?>
+<?php foreach($parsed as $index => $item): ?>
 <div class="card mb-3">
-    <div class="card-header d-flex flex-grow-1 align-items-center justify-content-between">
+    <div class="card-header d-flex flex-grow-1 align-items-center">
         <p class="h4 m-0">Soal No. <?=$index+1?></p>
-        <a href="<?= routeTo('crud/edit', ['table' => 'exam_question_items', 'id' => $item->id, 'filter' => ['question_id' => $item->question_id]]) ?>" class="btn btn-success btn-sm">Edit</a>
     </div>
     <div class="card-body">
-        <p><?=$item->description?></p>
+        <p><?=$item['description']?></p>
         <div class="answers">
             <ul>
-                <?php foreach($item->answers as $key => $answer): ?>
+                <?php foreach($item['answers'] as $key => $answer): ?>
                 <li>
                     <div style="display:flex;flex-direction: row-reverse;align-items:center">
-                        <input type="radio" <?= $answer->score ? 'checked' : ''?>>
+                        <input type="radio" <?= $answer['score'] ? 'checked' : ''?>>
                         <label>
-                            <?=$answer->description?>
+                            <?=$answer['description']?>
                         </label>
                         <span class="me-3 cursor-pointer">
-                            <?=chr($key+65)?>
+                            <?=$key?>
                         </span>
                     </div>
                 </li>
@@ -73,5 +71,14 @@ input[type="radio"] {
     </div>
 </div>
 <?php endforeach ?>
+
+<form action="" method="post" enctype="multipart/form-data">
+    <?= csrf_field() ?>
+    <input type="hidden" name="submit" value="save">
+    <textarea name="text" class="form-control" style="opacity:0"><?=$text?></textarea>
+    <div class="form-group">
+        <button class="btn btn-primary">Submit</button>
+    </div>
+</form>
 
 <?php get_footer() ?>

@@ -47,5 +47,6 @@ return [
     'preview' => 'Preview',
     'schedule_status' => 'Status Jadwal',
     'exam_user_status' => 'Status Ujian',
-    'exam_room' => 'Ruangan Ujian'
+    'exam_room' => 'Ruangan Ujian',
+    'bulk_text' => 'Bulk From Text'
 ];
