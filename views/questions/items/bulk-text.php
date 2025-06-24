@@ -13,6 +13,10 @@
             <?= csrf_field() ?>
             <input type="hidden" name="submit" value="preview">
             <div class="form-group mb-2">
+                <label for="">Num of Options</label>
+                <input type="number" name="num_of_options" class="form-control" value="5">
+            </div>
+            <div class="form-group mb-2">
                 <label for="">Text</label>
                 <textarea name="text" class="form-control"></textarea>
             </div>

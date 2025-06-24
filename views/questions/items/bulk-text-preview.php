@@ -75,6 +75,7 @@ input[type="radio"] {
 <form action="" method="post" enctype="multipart/form-data">
     <?= csrf_field() ?>
     <input type="hidden" name="submit" value="save">
+    <input type="hidden" name="num_of_options" value="<?=$num_of_options?>">
     <textarea name="text" class="form-control" style="opacity:0"><?=$text?></textarea>
     <div class="form-group">
         <button class="btn btn-primary">Submit</button>

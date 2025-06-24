@@ -10,14 +10,15 @@ $question_id = isset($_GET['question_id']) ? $_GET['question_id'] : null;
 if(Request::isMethod('POST'))
 {
     $text = $_POST['text'];
-    $parsed = parseSoal($text);
+    $num_of_options = $_POST['num_of_options'];
+    $parsed = parseSoal($text, $num_of_options);
     
     if($_POST['submit'] == 'preview')
     {
         Page::setActive("exam.exam_question_items");
         Page::setTitle('Preview');
 
-        return view('exam/views/questions/items/bulk-text-preview', compact('question_id', 'text', 'parsed'));
+        return view('exam/views/questions/items/bulk-text-preview', compact('question_id', 'text', 'parsed','num_of_options'));
     }
     else
     {

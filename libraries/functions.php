@@ -79,7 +79,7 @@ function generateQuestionSchedule($schedule_id, $message = true)
 }
 
 // Fungsi untuk memparsing soal
-function parseSoal($text) {
+function parseSoal($text, $num_of_options = 5) {
     // Pisahkan soal berdasarkan baris
     $lines = explode("\n", $text);
     
@@ -87,22 +87,22 @@ function parseSoal($text) {
     $soalList = [];
 
     // Proses setiap 9 baris menjadi satu soal
-    for ($i = 0; $i < count($lines); $i += 9) {
+    for ($i = 0; $i < count($lines); $i += ($num_of_options + 4)) {
         // Pastikan ada cukup baris untuk soal
         // if ($i + 8 < count($lines)) {
             // Inisialisasi soal
             $soal = [];
             
             // Deskripsi soal
-            $soal['description'] = trim($lines[$i + 1]);
+            $soal['description'] = str_replace('\n','<br>',trim($lines[$i + 1]));
 
             // Pilihan jawaban
             $pilihan = [];
-            $kunci_jawaban = strtolower(trim(substr($lines[$i + 7], 14))); // Mengambil kunci jawaban setelah "Kunci Jawaban: "
-            for ($j = 2; $j <= 6; $j++) {
-                $alphabet = strtolower(substr($lines[$i + $j], 0, 1));
+            $kunci_jawaban = strtolower(substr(trim($lines[$i + ($num_of_options+2)]), -1)); // Mengambil kunci jawaban setelah berdasarkan karakter terakhir
+            for ($j = 2; $j <= ($num_of_options+1); $j++) {
+                $alphabet = strtolower(substr(trim($lines[$i + $j]), 0, 1));
                 $pilihan[$alphabet] = [
-                    'description' => substr($lines[$i + $j], 3),
+                    'description' => substr(trim($lines[$i + $j]), 3),
                     'score' => $alphabet == $kunci_jawaban
                 ];
             }
