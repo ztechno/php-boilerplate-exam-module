@@ -2,6 +2,7 @@
 
 use Core\Scheduler;
 use Core\Database;
+use Core\Utility;
 
 Scheduler::register('exam/commands/process-answers');
 Scheduler::register('exam/commands/auto-generate');
@@ -67,6 +68,16 @@ function generateQuestionSchedule($schedule_id, $message = true)
         $data = json_encode($items);
         $db->query = "INSERT INTO exam_schedule_user_data (schedule_id, user_id, `data`) VALUES ($schedule_id, $user->id, ?)";
         $db->exec(false, [$data]);
+
+        $parent_path = Utility::parentPath();
+        $json = $parent_path . 'public/json/' . env('APP_PREFIX');
+        if(!file_exists($json))
+        {
+            mkdir($json);
+        }
+
+        $filename = $schedule_id . '-' . $user->id.'.json';
+        file_put_contents($json . '/' . $filename, $data);
     }
 
     $msg = "$schedule->name generate success\n";

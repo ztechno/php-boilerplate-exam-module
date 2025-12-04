@@ -91,6 +91,23 @@ input[type="radio"] {
 <?php if(!$correction): ?>
 <button class="btn btn-primary">Submit</button>
 <?php endif ?>
+
+<?php if($schedule_user_data->logs): ?>
+<div class="card mb-3">
+    <div class="card-header d-flex flex-grow-1 align-items-center">
+        <p class="h4 m-0">Log Aktivitas Peserta</p>
+    </div>
+    <div class="card-body">
+        <?php foreach($schedule_user_data->logs as $log): ?>
+        <div style="margin-bottom: 15px;">
+            <strong><?=$log->type?></strong> -   
+            <small><?=$log->time?></small>
+            <p><?=$log->message?></p>
+        </div>
+        <?php endforeach ?>
+    </div>
+</div>
+<?php endif ?>
 </form>
 
 <?php get_footer() ?>

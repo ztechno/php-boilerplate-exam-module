@@ -77,7 +77,7 @@ if($schedule_user_data)
 {
 
     $schedule_user_data->data = json_decode($schedule_user_data->data);
-
+    $schedule_user_data->logs = json_decode($schedule_user_data->logs);
 
     $answers = $db->all('exam_member_answers', [
         'schedule_id' => $schedule_id,
